@@ -28,14 +28,19 @@ public class Controller
   
         p.getFilesProject();
         //p.getFilesFolder();
-        p.parser();
+        p.firstStep();
+        p.secondStep();
         
         ArrayList<Class> c = p.getMetrics();
         
         for (int i=0; i<c.size(); i++)
         {   System.out.println("Nome: "+c.get(i).getName());
+            System.out.println("Classes: "+c.get(i).getClasses());
+            System.out.println("Interfaces: "+c.get(i).getInterfaces());
             System.out.println("Atributos: "+c.get(i).getAttributes());
             System.out.println("Métodos: "+c.get(i).getMethods());
+            //System.out.println("Possui pai: "+ c.get(i).isIsChildren());
+            System.out.println("Filhos: "+c.get(i).getChildren());
             System.out.println("Linhas: "+c.get(i).getLines());
             System.out.println();
         }

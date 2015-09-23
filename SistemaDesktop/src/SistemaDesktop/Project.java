@@ -24,6 +24,7 @@ public class Project
 {
     private ArrayList<File> files;
     private ArrayList<Class> metrics;
+    private ArrayList<String> filesNoComment;
     
     /**
      * Método construtor.
@@ -32,6 +33,7 @@ public class Project
     {
         files = new ArrayList<>();
         metrics = new ArrayList<>();
+        filesNoComment = new ArrayList<>();
     }
     
     /**
@@ -135,15 +137,12 @@ public class Project
         return line;
     }
     
-    private ArrayList<String> removeComment() throws IOException
-    {
-        ArrayList<String> fileNoComment = new ArrayList<>();
-        
+    private void removeComment() throws IOException
+    {        
         for (int i=0; i<files.size(); i++)
         {   String file = fileToString (files.get(i), i);
             int index = 0;
             char[] temp = new char[file.length()];
-            //System.out.println(file);
         
             for (int j=0; j<file.length()-1; j++)
             {   if (file.charAt(j) == '/' && file.charAt(j+1) == '*')
@@ -165,54 +164,77 @@ public class Project
             String stringTemp = new String(temp);
             stringTemp = stringTemp.replaceAll("\\s+|\\t+", " ");
             stringTemp = stringTemp.replaceAll("^\\s", "");
-            fileNoComment.add(stringTemp);
+            filesNoComment.add(stringTemp);
         }
-        
-        return fileNoComment;
     }
     
-    public void parser() throws IOException
+    public void firstStep() throws IOException
     {   
-        ArrayList<String> filesNoComment = removeComment();
+        removeComment();
         String[] splitSpace;
-        int atrib, countComma, methods;
-        boolean flagClass, flagMethod;
+        int atrib, countComma, methods, classes, interfaces;
+        boolean flagClass, flagMethod, flagInterface;
         
         for (int i=0; i<filesNoComment.size(); i++)
         {   atrib = 0;
             methods = 0;
-            flagClass = false;
-            flagMethod = false;
-            //System.out.println(filesNoComment.get(i));
+            classes = 0;
+            interfaces = 0;
+
             splitSpace = filesNoComment.get(i).split(" ");
             for (int j=0; j<splitSpace.length; j++)
-            {   if ((splitSpace[j].contains("public") || splitSpace[j].contains("protected") || splitSpace[j].contains("private")) && !splitSpace[j].contains("\""))
+            {   flagClass = false;
+                flagMethod = false;
+                flagInterface = false;
+                if ((splitSpace[j].contains("public") || splitSpace[j].contains("protected") || splitSpace[j].contains("private")) && !splitSpace[j].contains("\""))
                 {   countComma = 0;
                     //Classe
                     for (int t=j+1; t<splitSpace.length; t++)
+                    {   if (splitSpace[t].contains(";"))
+                            break;
                         if (splitSpace[t].equals("class"))
                         {   flagClass = true;
+                            classes++;
+                            for (int w=t+1; w<splitSpace.length; w++)
+                                if ((splitSpace[w].contains("extends") || splitSpace[w].contains("implements")) && !splitSpace[w].contains("\""))
+                                {   metrics.get(i).setIsChildren(true);
+                                    break;
+                                }
                             break;
                         }
-                    //Método
+                    }
+                    //Interface
                     if (!flagClass)
+                        for (int t=j+1; t<splitSpace.length; t++)
+                        {   if (splitSpace[t].contains(";"))
+                                break;
+                            if (splitSpace[t].equals("interface"))
+                            {   flagInterface = true;
+                                interfaces++;
+                                for (int w=t+1; w<splitSpace.length; w++)
+                                    if (splitSpace[w].contains("extends") || splitSpace[w].contains("implements"))
+                                    {   metrics.get(i).setIsChildren(true);
+                                        break;
+                                    }
+                                break;
+                            }
+                        }
+                    //Método
+                    if (!flagClass && !flagInterface)
                         for (int t=j+1; t<splitSpace.length; t++)
                         {   if (splitSpace[t].contains(";"))
                                 break;
                             if (splitSpace[t].contains("("))
                             {   flagMethod = true;
                                 methods++;
-                                //System.out.println(splitSpace[t]);
                                 break;
                             }
                         }
                     //Atributos
-                    if (!flagClass && !flagMethod)
+                    if (!flagClass && !flagMethod && !flagInterface)
                     {   for (int t=j+1; t<splitSpace.length; t++)
                         {   if (splitSpace[t].contains(",") && !splitSpace[t].contains("\""))
-                            {   countComma += splitSpace[t].length() - splitSpace[t].replaceAll(",", "").length();
-                                //System.out.println(splitSpace[j]);
-                            }
+                                countComma += splitSpace[t].length() - splitSpace[t].replaceAll(",", "").length();
                             if (splitSpace[t].contains(";"))
                                 break;
                         }
@@ -220,16 +242,64 @@ public class Project
                             atrib += countComma+1;
                         else
                             if (!splitSpace[j].contains("\""))
-                            {   atrib++;
-                                //System.out.println (splitSpace[j+1]);
-                            }
+                                atrib++;
                     }
-                    flagClass = false;
-                    flagMethod = false;
                 }
             }
+            metrics.get(i).setClasses(classes);
             metrics.get(i).setAttributes(atrib);
             metrics.get(i).setMethods(methods);
+            metrics.get(i).setInterfaces(interfaces);
+        }
+    }
+    
+    public void secondStep()
+    {   
+        String[] splitSpace;
+        String temp;
+        char[] aux;
+        int index;
+        
+        for (int i=0; i<metrics.size(); i++)
+        {   temp = "";
+            index = 0;
+            if (metrics.get(i).isIsChildren())
+            {   splitSpace = filesNoComment.get(i).split(" ");
+                for (int j=0; j<splitSpace.length; j++)
+                {   if ((splitSpace[j].contains("public") || splitSpace[j].contains("protected") || splitSpace[j].contains("private")) && !splitSpace[j].contains("\""))
+                    {   //Classe
+                        for (int t=j+1; t<splitSpace.length; t++)
+                        {   if (splitSpace[t].contains(";"))
+                                break;
+                            if (splitSpace[t].equals("class") || splitSpace[t].endsWith("interface"))
+                            {   for (int w=t+1; w<splitSpace.length; w++)
+                                    if ((splitSpace[w].contains("extends") || splitSpace[w].contains("implements")) && !splitSpace[w].contains("\""))
+                                    {   if (splitSpace[w+1].contains("{"))
+                                        {   aux = new char[splitSpace[w+1].length()];
+                                            for (int x=0; x<splitSpace[w+1].length(); x++)
+                                            {   if (splitSpace[w+1].charAt(x) == '{')
+                                                    break;
+                                                aux[index] = splitSpace[w+1].charAt(x);
+                                                index++;
+                                            }
+                                            temp = new String(aux, 0, index);
+                                        }
+                                        else
+                                            temp = splitSpace[w+1];
+                                        break;
+                                    }
+                                break;
+                            }
+                        }
+                        if (!temp.equals(""))
+                            for (int t=0; t<metrics.size(); t++)
+                                if (metrics.get(t).getName().contains(temp+".java"))
+                                {   metrics.get(t).setChildren(metrics.get(t).getChildren()+1);
+                                    break;
+                                }
+                    }                
+                }
+            }    
         }
     }
     

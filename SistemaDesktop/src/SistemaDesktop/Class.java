@@ -13,6 +13,7 @@ public class Class
 {   
     private String name;
     private int classes, interfaces, children, dit, methods, attributes, lines;
+    private boolean isChildren;
     
     public Class()
     {
@@ -24,6 +25,17 @@ public class Class
         methods = 0;
         attributes = 0;
         lines = 0;
+        isChildren = false;
+    }
+
+    public boolean isIsChildren() 
+    {
+        return isChildren;
+    }
+
+    public void setIsChildren(boolean isChildren) 
+    {
+        this.isChildren = isChildren;
     }
 
     public String getName() 
