@@ -9,6 +9,6 @@ package Resources;
  *
  * @author Gustavo
  */
-public class NewClass implements NewInterface{
+public abstract class NewClass implements NewInterface{
     
 }

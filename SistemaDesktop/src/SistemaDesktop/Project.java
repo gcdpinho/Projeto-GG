@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Classe responsável por percorrer o diretório e retornar os arquivos .java
- * encontrados em uma lista.
+ * e gerar métricas desses arquivos.
  * 
  * @author Gustavo
  */
@@ -72,7 +72,7 @@ public class Project
             boolean flag = false;
             for (int i=0; i<folders.length; i++)
             {   File subPaste = folders[i];
-                //pasta src do projeto, raiz da arvore
+                //pasta src do projeto, raiz da árvore
                 if(subPaste.getName().equals("src"))
                 {   searchJava(subPaste);
                     flag = true;
@@ -120,6 +120,21 @@ public class Project
             }
     }
     
+    /**
+     * Método responsável por transformar o arquivo em uma String.
+     * 
+     * @param file File - Corresponde ao arquivo a ser transformado.
+     * 
+     * @param i int - Corresponde à posição do arquivo na lista.
+     * 
+     * @return String - Corresponde à tradução do arquivo, a String.
+     * 
+     * @throws FileNotFoundException - Corresponde à exceção de não encontrar o
+     * arquivo.
+     * 
+     * @throws IOException - Corresponde à alguma exceção na leitura de
+     * arquivos.
+     */
     private String fileToString(File file, int i) throws FileNotFoundException, IOException
     {
         FileReader fr = new FileReader(file);
@@ -137,6 +152,12 @@ public class Project
         return line;
     }
     
+    /**
+     * Método responsável por retirar os comentários do arquivo.
+     * 
+     * @throws IOException - Corresponde à alguma exceção na leitura de
+     * arquivos. 
+     */
     private void removeComment() throws IOException
     {        
         for (int i=0; i<files.size(); i++)
@@ -168,6 +189,13 @@ public class Project
         }
     }
     
+    /**
+     * Método responsável pela primeira passagem do parser, gerando as métricas
+     * número de atributos, métodos, classes, interfaces; de cada arquivo.
+     * 
+     * @throws IOException - Corresponde à alguma exceção na leitura de
+     * arquivos.
+     */
     public void firstStep() throws IOException
     {   
         removeComment();
@@ -222,7 +250,7 @@ public class Project
                     //Método
                     if (!flagClass && !flagInterface)
                         for (int t=j+1; t<splitSpace.length; t++)
-                        {   if (splitSpace[t].contains(";"))
+                        {   if (splitSpace[t].contains(";") && !splitSpace[t].contains("("))
                                 break;
                             if (splitSpace[t].contains("("))
                             {   flagMethod = true;
@@ -253,6 +281,10 @@ public class Project
         }
     }
     
+    /**
+     * Método responsável pela segunda passagem do parser, gerando a métrica
+     * número de filhos de cada arquivo.
+     */
     public void secondStep()
     {   
         String[] splitSpace;
@@ -263,12 +295,11 @@ public class Project
         for (int i=0; i<metrics.size(); i++)
         {   temp = "";
             index = 0;
-            if (metrics.get(i).isIsChildren())
+            if (metrics.get(i).isChildren())
             {   splitSpace = filesNoComment.get(i).split(" ");
                 for (int j=0; j<splitSpace.length; j++)
                 {   if ((splitSpace[j].contains("public") || splitSpace[j].contains("protected") || splitSpace[j].contains("private")) && !splitSpace[j].contains("\""))
-                    {   //Classe
-                        for (int t=j+1; t<splitSpace.length; t++)
+                    {   for (int t=j+1; t<splitSpace.length; t++)
                         {   if (splitSpace[t].contains(";"))
                                 break;
                             if (splitSpace[t].equals("class") || splitSpace[t].endsWith("interface"))
@@ -303,6 +334,74 @@ public class Project
         }
     }
     
+    /**
+     * Método responsável pela terceira e última passagem do parser, gerando a
+     * métrica dit de cada arquivo.
+     */
+    public void thirdStep()
+    {   
+        for (int i=0; i<metrics.size(); i++)
+            metrics.get(i).setDit(buildDit(i));
+    }
+    
+    /**
+     * Método reposponsável por auxiliar o método thirdStep a fazer o cálculo da
+     * métrica dit.
+     * 
+     * @param i int - Corresponde ao índice do arquivo na lista que precisa ser
+     * analisado.
+     * 
+     * @return int - Corresponde ao valor do dit.
+     */
+    private int buildDit(int i)
+    {
+        String[] splitSpace;
+        int index = 0;
+        char[] aux;
+        String temp = "";
+        
+        splitSpace = filesNoComment.get(i).split(" ");
+        for (int j=0; j<splitSpace.length; j++)
+        {   if ((splitSpace[j].contains("public") || splitSpace[j].contains("protected") || splitSpace[j].contains("private")) && !splitSpace[j].contains("\""))
+            {   for (int t=j+1; t<splitSpace.length; t++)
+                {   if (splitSpace[t].contains(";"))
+                        break;
+                    if (splitSpace[t].equals("class") || splitSpace[t].endsWith("interface"))
+                    {   for (int w=t+1; w<splitSpace.length; w++)
+                            if ((splitSpace[w].contains("extends") || splitSpace[w].contains("implements")) && !splitSpace[w].contains("\""))
+                            {   if (splitSpace[w+1].contains("{"))
+                                {   aux = new char[splitSpace[w+1].length()];
+                                    for (int x=0; x<splitSpace[w+1].length(); x++)
+                                    {   if (splitSpace[w+1].charAt(x) == '{')
+                                            break;
+                                        aux[index] = splitSpace[w+1].charAt(x);
+                                        index++;
+                                    }
+                                    temp = new String(aux, 0, index);
+                                }
+                                else
+                                    temp = splitSpace[w+1];
+                                break;
+                            }
+                        break;
+                    }
+                }
+            }
+            if (!temp.equals(""))
+                break;
+        }
+        for (int j=0; j<metrics.size(); j++)
+            if (metrics.get(j).getName().equals(temp+".java"))
+                return buildDit(j)+1;
+        
+        return 1;
+    }
+    
+    /**
+     * Método getter, responsável por retornar as métricas de cada arquivo.
+     * 
+     * @return ArrayList - Corresponde às métricas geradas.
+     */
     public ArrayList<Class> getMetrics()
     {
         return metrics;
