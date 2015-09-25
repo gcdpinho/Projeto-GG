@@ -24,7 +24,9 @@ public class LinesOfCode extends Metrics
     public void calculatesMetric(ArrayList<Class> metrics)
     {   
         for (int i=0; i<metrics.size(); i++)
-            linesOfCode += metrics.get(i).getLines();
+        {   linesOfCode += metrics.get(i).getLines();
+            //System.out.println(metrics.get(i).getName()+"\n"+metrics.get(i).getLines());
+        }
     }   
     
     public int getLinesOfCode() 

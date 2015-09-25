@@ -59,7 +59,7 @@ public class Project
     /**
      * Método responsável por percorrer o raiz do projeto e encontrar os
      * arquivos .java.
-     */
+     *//*
     public void getFilesProject() 
     {       
         JFileChooser fc;
@@ -85,7 +85,7 @@ public class Project
        else
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório."); 
     }
-    
+    */
     /**
      * Método responsável por auxiliar o getFilesProject na busca pelos arquivos
      * .java na pasta raiz do projeto.
@@ -139,15 +139,10 @@ public class Project
     {
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
-        String line = br.readLine();
-        int countLine = 1;
+        String line = "";
         
         while(br.ready())
-        {   line += "\n" + br.readLine();
-            countLine++;
-        }
-        
-        metrics.get(i).setLines(countLine);
+            line += "\n" + br.readLine();
         
         return line;
     }
@@ -159,34 +154,82 @@ public class Project
      * arquivos. 
      */
     private void removeComment() throws IOException
-    {        
-        for (int i=0; i<files.size(); i++)
-        {   String file = fileToString (files.get(i), i);
-            int index = 0;
-            char[] temp = new char[file.length()];
+    {   
+        boolean flag;
+        String file, stringTemp = "";
         
-            for (int j=0; j<file.length()-1; j++)
-            {   if (file.charAt(j) == '/' && file.charAt(j+1) == '*')
-                {   j+=2;
-                    while(file.charAt(j) != '*' || file.charAt(j+1) != '/')
-                        j++;
-                    j+=2;
+        for (int i=0; i<files.size(); i++)
+        {   flag = false;
+            do     
+            {   if (!flag)
+                {   file = fileToString (files.get(i), i);
+                    flag = true;
                 }
-                if (file.charAt(j) == '/' && file.charAt(j+1) == '/')
-                {   j+=2;
-                    while (file.charAt(j) != '\n')
+                else
+                    file = stringTemp; 
+                int index = 0;
+                char[] temp = new char[file.length()];
+
+                for (int j=0; j<file.length()-1; j++)
+                {   if (file.charAt(j) == '/' && file.charAt(j+1) == '*')
+                    {   j+=2;
+                        while(file.charAt(j) != '*' || file.charAt(j+1) != '/')
+                            j++;
+                        j+=2;
+                    }
+                    if (file.charAt(j) == '/' && file.charAt(j+1) == '/')
+                    {   j+=2;
+                        while (file.charAt(j) != '\n')
+                            j++;
                         j++;
-                    j++;
+                    }
+                    temp[index] = file.charAt(j);
+                    index++;
                 }
-                temp[index] = file.charAt(j);
-                index++;
-            }
-            temp[index] = file.charAt(file.length()-1);
-            String stringTemp = new String(temp);
-            stringTemp = stringTemp.replaceAll("\\s+|\\t+", " ");
-            stringTemp = stringTemp.replaceAll("^\\s", "");
-            filesNoComment.add(stringTemp);
+                temp[index] = file.charAt(file.length()-1);
+                stringTemp = new String(temp, 0, index+1);
+
+                if (!testComment(stringTemp))
+                {   metrics.get(i).setLines(countLines(stringTemp));
+
+                    stringTemp = stringTemp.replaceAll("\\s+|\\t", " ");
+                    stringTemp = stringTemp.replaceAll("^\\s", "");
+                    filesNoComment.add(stringTemp);
+                }
+            } while (testComment(stringTemp));
         }
+    }
+    
+    private boolean testComment(String file)
+    {
+        for (int i=0; i<file.length()-1; i++)
+            if (file.charAt(i) == '/' && file.charAt(i+1) == '*')
+                return true;
+        
+        return false;
+    }
+    
+    /**
+     * Método responsável por contar o número de linhas efetivas (sem
+     * comentários e linhas em branco).
+     * 
+     * @param stringTemp String - Corresponde ao arquivo a ser analisado.
+     * 
+     * @return int - Corresponde ao número de linhas efetivas do arquivo
+     */
+    private int countLines(String stringTemp)
+    {
+        int countLines = 1;
+        String stringLocal;
+        
+        stringLocal = stringTemp.replaceAll("\\\n\\s+\n", "\n");
+        stringLocal = stringLocal.replaceAll("\\n\n", "\n");
+        stringLocal = stringLocal.replaceAll("^\\s", "");
+        for (int i=0; i<stringLocal.length(); i++)
+            if (stringLocal.charAt(i) == '\n')
+                countLines++;
+        
+        return countLines;
     }
     
     /**

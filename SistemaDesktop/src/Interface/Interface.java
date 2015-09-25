@@ -5,12 +5,33 @@
  */
 package Interface;
 
+import SistemaDesktop.LinesOfCode;
+import SistemaDesktop.MaxDit;
+import SistemaDesktop.NumberOfAttributes;
+import SistemaDesktop.NumberOfChildren;
+import SistemaDesktop.NumberOfClasses;
+import SistemaDesktop.NumberOfInterfaces;
+import SistemaDesktop.NumberOfMethods;
+import SistemaDesktop.Project;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gustavo
  */
 public class Interface extends javax.swing.JFrame 
-{
+{   
+    private boolean flagInput;
+    private Project project;
+    private NumberOfClasses numberOfClasses;
+    private NumberOfInterfaces numberOfInterfaces;
+    private MaxDit maxDit;
+    private LinesOfCode linesOfCode;
+    private NumberOfAttributes numberOfAttributes;
+    private NumberOfMethods numberOfMethods;
+    private NumberOfChildren numberOfChildren;
 
     /**
      * Classe responsável pela interface entre o usuário e o programa.
@@ -18,6 +39,20 @@ public class Interface extends javax.swing.JFrame
     public Interface() 
     {
         initComponents();
+        
+        flagInput = false;
+        numberOfClasses = new NumberOfClasses();
+        numberOfInterfaces = new NumberOfInterfaces();
+        maxDit = new MaxDit();
+        linesOfCode = new LinesOfCode();
+        numberOfAttributes = new NumberOfAttributes();
+        numberOfMethods = new NumberOfMethods();
+        numberOfChildren = new NumberOfChildren();
+        project = new Project();
+        
+        this.setSize(535, 360);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -29,22 +64,154 @@ public class Interface extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        title = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema Desktop");
+        setResizable(false);
+        getContentPane().setLayout(null);
+        getContentPane().add(title);
+        title.setBounds(250, 43, 0, 0);
+        getContentPane().add(background);
+        background.setBounds(447, 247, 0, 0);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 130, 310, 140);
+
+        jButton1.setText("Calcular Métricas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(350, 130, 160, 40);
+
+        jButton2.setText("Mostrar Resultados");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(350, 180, 160, 40);
+
+        jButton3.setText("Gerar XML");
+        getContentPane().add(jButton3);
+        jButton3.setBounds(350, 230, 160, 40);
+
+        jMenu1.setText("Arquivo");
+
+        jMenuItem1.setText("Selecionar Pasta");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Sobre");
+
+        jMenuItem3.setText("Desenvolvedores");
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setText("Aplicação");
+        jMenu2.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if (flagInput)
+        {   try 
+            {   project.firstStep();
+                project.secondStep();
+                project.thirdStep();
+                
+                ArrayList<SistemaDesktop.Class> classMetrics = project.getMetrics();
+                
+                numberOfClasses.calculatesMetric(classMetrics);
+                numberOfInterfaces.calculatesMetric(classMetrics);
+                maxDit.calculatesMetric(classMetrics);
+                linesOfCode.calculatesMetric(classMetrics);
+                numberOfAttributes.calculatesMetric(classMetrics);
+                numberOfMethods.calculatesMetric(classMetrics);
+                numberOfChildren.calculatesMetric(classMetrics);
+                
+                if (classMetrics.size() == 1)
+                    jTextArea1.setText("Foi encontrado "+classMetrics.size()+" arquivo.");
+                else
+                    jTextArea1.setText("Foram encontrados "+classMetrics.size()+" arquivos.");
+            } 
+            catch (IOException ex) 
+            {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Selecione um diretório, no menu arquivo, antes de calcular as métricas.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        jTextArea1.setText("");
+        jTextArea1.append("Métricas do projeto");
+        jTextArea1.append("\n--------------------------------------------------------");
+        jTextArea1.append("\nNúmero de classes: "+numberOfClasses.getNumberOfClasses());
+        jTextArea1.append("\nNúmero de interfaces: "+numberOfInterfaces.getNumberOfInterface());
+        jTextArea1.append("\nDit Máximo: "+maxDit.getMaxDit());
+        jTextArea1.append("\nLinhas de código: "+linesOfCode.getLinesOfCode());
+        jTextArea1.append("\n--------------------------------------------------------");
+        jTextArea1.append("\nMétricas de classe (média e desvio padrão)");
+        jTextArea1.append("\n--------------------------------------------------------");
+        jTextArea1.append(String.format("\nNúmero de atributos\nMédia: %.02f\nDesvio padrão: %.02f", numberOfAttributes.getAverage(), numberOfAttributes.getStandartDeviation()));
+        jTextArea1.append("\n--------------------------------------------------------");
+        jTextArea1.append(String.format("\nNúmero de métodos\nMédia: %.02f\nDesvio padrão: %.02f", numberOfMethods.getAverage(), numberOfMethods.getStandartDeviation()));
+        jTextArea1.append("\n--------------------------------------------------------");
+        jTextArea1.append(String.format("\nNúmero de filhos\nMédia: %.02f\nDesvio padrão: %.02f", numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation()));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+        
+        project.getFilesFolder();
+        flagInput = true;
+    }//GEN-LAST:event_jMenuItem1MousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

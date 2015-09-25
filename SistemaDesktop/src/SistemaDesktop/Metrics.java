@@ -14,8 +14,7 @@ import java.util.ArrayList;
  * @author Gustavo
  */
 public abstract class Metrics 
-{   
-    
+{       
     public abstract void calculatesMetric(ArrayList<Class> metrics);
     
 }
