@@ -13,6 +13,7 @@ import SistemaDesktop.NumberOfClasses;
 import SistemaDesktop.NumberOfInterfaces;
 import SistemaDesktop.NumberOfMethods;
 import SistemaDesktop.Project;
+import SistemaDesktop.XmlArchive;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -31,6 +32,41 @@ public class Interface extends javax.swing.JFrame
     private NumberOfAttributes numberOfAttributes;
     private NumberOfMethods numberOfMethods;
     private NumberOfChildren numberOfChildren;
+
+    public NumberOfClasses getNumberOfClasses() 
+    {
+        return numberOfClasses;
+    }
+
+    public NumberOfInterfaces getNumberOfInterfaces() 
+    {
+        return numberOfInterfaces;
+    }
+
+    public MaxDit getMaxDit() 
+    {
+        return maxDit;
+    }
+
+    public LinesOfCode getLinesOfCode() 
+    {
+        return linesOfCode;
+    }
+
+    public NumberOfAttributes getNumberOfAttributes() 
+    {
+        return numberOfAttributes;
+    }
+
+    public NumberOfMethods getNumberOfMethods() 
+    {
+        return numberOfMethods;
+    }
+
+    public NumberOfChildren getNumberOfChildren() 
+    {
+        return numberOfChildren;
+    }
 
     /**
      * Classe responsável pela interface entre o usuário e o programa.
@@ -121,6 +157,11 @@ public class Interface extends javax.swing.JFrame
 
         jButton3.setText("Gerar XML");
         jButton3.setEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(350, 230, 160, 40);
 
@@ -234,6 +275,12 @@ public class Interface extends javax.swing.JFrame
        
         JOptionPane.showMessageDialog(null, "O sistema analisa um conjunto de arquivos .java e gera algumas métricas, definidas no escopo da discplina de \nDesenvolvimento de Software, lecionada pelos professores Paulo Ferreira e Lisane Brisolara, em 2015/2.", "Informação - Aplicação", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_jMenuItem4MousePressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        XmlArchive xml = new XmlArchive();
+        xml.generate(this);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
