@@ -356,10 +356,15 @@ public class Interface extends javax.swing.JFrame
      * @param evt - Corresponde ao clique do mouse.
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-        XmlArchive xml = new XmlArchive();
-        xml.generateXML(this);
-        jTextArea1.setText("O arquivo xml foi criado com sucesso.");
+        String answer;
+        answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
+        if (answer == null || answer.equals("")){
+            JOptionPane.showMessageDialog(null, "Você não escolheu nenhum nome para o projeto", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
+        }else{
+            XmlArchive xml = new XmlArchive(answer);
+            xml.generateXML(this, answer);
+            jTextArea1.setText("O arquivo xml foi criado com sucesso.");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

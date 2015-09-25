@@ -28,10 +28,11 @@ public class XmlArchive
     
     /**
      * Método construtor.
+     * @param answer nome do projeto do usuário
      */
-    public XmlArchive()
+    public XmlArchive(String answer)
     {
-        this.metrics = new Element("Metrics");
+        this.metrics = new Element(answer);
         this.document = new Document(metrics);
         this.projectMetrics = new Element ("ProjectMetrics");
         this.metricsByClass = new Element ("MetricsByClass");
@@ -57,7 +58,7 @@ public class XmlArchive
      * 
      * @param inter Interface - Corresponde à interface que contem as métricas.
      */
-    public void generateXML(Interface inter)
+    public void generateXML(Interface inter, String projectName)
     {
         numOfClasses.setText(Integer.toString(inter.getNumberOfClasses().getNumberOfClasses()));
         numOfInterfaces.setText(Integer.toString(inter.getNumberOfInterfaces().getNumberOfInterface()));
@@ -87,7 +88,7 @@ public class XmlArchive
         metrics.addContent(classMetrics);
         XMLOutputter xOut = new XMLOutputter();
         try 
-        {   FileWriter fw = new FileWriter(new File("Metrics" + gerador.nextInt() + ".xml"));
+        {   FileWriter fw = new FileWriter(new File(projectName + ".xml"));
             xOut.output(document, fw);
         }
         catch (IOException ex) 
