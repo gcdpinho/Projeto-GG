@@ -23,7 +23,6 @@ import javax.swing.JOptionPane;
  */
 public class Interface extends javax.swing.JFrame 
 {   
-    private boolean flagInput;
     private Project project;
     private NumberOfClasses numberOfClasses;
     private NumberOfInterfaces numberOfInterfaces;
@@ -39,8 +38,7 @@ public class Interface extends javax.swing.JFrame
     public Interface() 
     {
         initComponents();
-        
-        flagInput = false;
+
         numberOfClasses = new NumberOfClasses();
         numberOfInterfaces = new NumberOfInterfaces();
         maxDit = new MaxDit();
@@ -64,13 +62,13 @@ public class Interface extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        title = new javax.swing.JLabel();
-        background = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        title = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -82,19 +80,27 @@ public class Interface extends javax.swing.JFrame
         setTitle("Sistema Desktop");
         setResizable(false);
         getContentPane().setLayout(null);
-        getContentPane().add(title);
-        title.setBounds(250, 43, 0, 0);
-        getContentPane().add(background);
-        background.setBounds(447, 247, 0, 0);
 
+        jScrollPane1.setFocusCycleRoot(true);
+        jScrollPane1.setFocusable(false);
+
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
+        jTextArea1.setText("Não sabe o que fazer? \nSelecione um diretório clicando em Arquivo->Selecionar Entrada.");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setFocusable(false);
+        jTextArea1.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 130, 310, 140);
 
         jButton1.setText("Calcular Métricas");
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -104,6 +110,7 @@ public class Interface extends javax.swing.JFrame
         jButton1.setBounds(350, 130, 160, 40);
 
         jButton2.setText("Mostrar Resultados");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -113,8 +120,17 @@ public class Interface extends javax.swing.JFrame
         jButton2.setBounds(350, 180, 160, 40);
 
         jButton3.setText("Gerar XML");
+        jButton3.setEnabled(false);
         getContentPane().add(jButton3);
         jButton3.setBounds(350, 230, 160, 40);
+
+        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title.png"))); // NOI18N
+        getContentPane().add(title);
+        title.setBounds(40, 30, 460, 70);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.jpg"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(-240, -40, 810, 410);
 
         jMenu1.setText("Arquivo");
 
@@ -131,9 +147,19 @@ public class Interface extends javax.swing.JFrame
         jMenu2.setText("Sobre");
 
         jMenuItem3.setText("Desenvolvedores");
+        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem3MousePressed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Aplicação");
+        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem4MousePressed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -145,33 +171,31 @@ public class Interface extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        if (flagInput)
-        {   try 
-            {   project.firstStep();
-                project.secondStep();
-                project.thirdStep();
-                
-                ArrayList<SistemaDesktop.Class> classMetrics = project.getMetrics();
-                
-                numberOfClasses.calculatesMetric(classMetrics);
-                numberOfInterfaces.calculatesMetric(classMetrics);
-                maxDit.calculatesMetric(classMetrics);
-                linesOfCode.calculatesMetric(classMetrics);
-                numberOfAttributes.calculatesMetric(classMetrics);
-                numberOfMethods.calculatesMetric(classMetrics);
-                numberOfChildren.calculatesMetric(classMetrics);
-                
-                if (classMetrics.size() == 1)
-                    jTextArea1.setText("Foi encontrado "+classMetrics.size()+" arquivo.");
-                else
-                    jTextArea1.setText("Foram encontrados "+classMetrics.size()+" arquivos.");
-            } 
-            catch (IOException ex) 
-            {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
-            }
+        try 
+        {   project.firstStep();
+            project.secondStep();
+            project.thirdStep();
+
+            ArrayList<SistemaDesktop.Class> classMetrics = project.getMetrics();
+
+            numberOfClasses.calculatesMetric(classMetrics);
+            numberOfInterfaces.calculatesMetric(classMetrics);
+            maxDit.calculatesMetric(classMetrics);
+            linesOfCode.calculatesMetric(classMetrics);
+            numberOfAttributes.calculatesMetric(classMetrics);
+            numberOfMethods.calculatesMetric(classMetrics);
+            numberOfChildren.calculatesMetric(classMetrics);
+
+            if (classMetrics.size() == 1)
+                jTextArea1.setText("Foi encontrado "+classMetrics.size()+" arquivo.");
+            else
+                jTextArea1.setText("Foram encontrados "+classMetrics.size()+" arquivos.");
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(true);
+        } 
+        catch (IOException ex) 
+        {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
         }
-        else
-            JOptionPane.showMessageDialog(null, "Selecione um diretório, no menu arquivo, antes de calcular as métricas.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -195,9 +219,21 @@ public class Interface extends javax.swing.JFrame
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
         
-        project.getFilesFolder();
-        flagInput = true;
+        if (project.getFilesFolder())
+            jButton1.setEnabled(true);
+        else
+            JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
     }//GEN-LAST:event_jMenuItem1MousePressed
+
+    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
+        
+        JOptionPane.showMessageDialog(null, "Esse trabalho foi desenvolvido por:\n- Gustavo Pinho\n- João Pedro Bretanha\n- Jean Antunes\n- Ândrio Araujo\n- Felipe Prestes", "Informação - Desenvolvedores", JOptionPane.INFORMATION_MESSAGE); 
+    }//GEN-LAST:event_jMenuItem3MousePressed
+
+    private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
+       
+        JOptionPane.showMessageDialog(null, "O sistema analisa um conjunto de arquivos .java e gera algumas métricas, definidas no escopo da discplina de \nDesenvolvimento de Software, lecionada pelos professores Paulo Ferreira e Lisane Brisolara, em 2015/2.", "Informação - Aplicação", JOptionPane.INFORMATION_MESSAGE); 
+    }//GEN-LAST:event_jMenuItem4MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
