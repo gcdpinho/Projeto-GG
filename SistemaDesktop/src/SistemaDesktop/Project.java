@@ -39,7 +39,7 @@ public class Project
     /**
      * Método responsável por percorrer uma pasta e encontrar os arquivos .java.
      */
-    public void getFilesFolder() 
+    public boolean getFilesFolder() 
     {  
         JFileChooser fc;
         fc = new JFileChooser();  
@@ -49,11 +49,17 @@ public class Project
         if(res == JFileChooser.APPROVE_OPTION)
         {   File diretory = fc.getSelectedFile();
             File folders[] = diretory.listFiles();
-             for (int i=0; i<folders.length; i++)
+            for (int i=0; i<folders.length; i++)
                 searchJava(folders[i]);
+            if (files.isEmpty())
+                return false;
+            else
+                return true;
         }
         else
-            JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório."); 
+        {   JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório.", "Aviso", JOptionPane.INFORMATION_MESSAGE); 
+            return false;
+        }
     }
     
     /**
