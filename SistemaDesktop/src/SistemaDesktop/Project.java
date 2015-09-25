@@ -57,9 +57,8 @@ public class Project
                 return true;
         }
         else
-        {   JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório.", "Aviso", JOptionPane.INFORMATION_MESSAGE); 
             return false;
-        }
+        
     }
     
     /**

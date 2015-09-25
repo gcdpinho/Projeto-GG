@@ -279,7 +279,8 @@ public class Interface extends javax.swing.JFrame
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
         XmlArchive xml = new XmlArchive();
-        xml.generate(this);
+        xml.generateXML(this);
+        jTextArea1.setText("O arquivo xml foi criado com sucesso.");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

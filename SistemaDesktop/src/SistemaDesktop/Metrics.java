@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Classe abstrata, responsável por ser o ponto de partida da criação das
- * metricas em si.
+ * métricas em si.
  * 
  * @author Gustavo
  */

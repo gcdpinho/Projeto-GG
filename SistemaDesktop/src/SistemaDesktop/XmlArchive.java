@@ -44,7 +44,7 @@ public class XmlArchive
         this.numOfChildrenAverage = new Element ("Average");
         this.numOfChildrenSD = new Element ("StandartDeviation");
     }
-    public void generate(Interface inter)
+    public void generateXML(Interface inter)
     {
         numOfClasses.setText(Integer.toString(inter.getNumberOfClasses().getNumberOfClasses()));
         numOfInterfaces.setText(Integer.toString(inter.getNumberOfInterfaces().getNumberOfInterface()));
