@@ -123,7 +123,6 @@ public class Interface extends javax.swing.JFrame
     public Interface() 
     {
         initComponents();
-
         numberOfClasses = new NumberOfClasses();
         numberOfInterfaces = new NumberOfInterfaces();
         maxDit = new MaxDit();
@@ -131,7 +130,7 @@ public class Interface extends javax.swing.JFrame
         numberOfAttributes = new NumberOfAttributes();
         numberOfMethods = new NumberOfMethods();
         numberOfChildren = new NumberOfChildren();
-        project = new Project();
+       // project = new Project();
         
         this.setSize(535, 360);
         this.setLocationRelativeTo(null);
@@ -324,7 +323,7 @@ public class Interface extends javax.swing.JFrame
      * @param evt - Corresponde ao clique do mouse.
      */
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-        
+        project = new Project();
         if (project.getFilesFolder())
             jButton1.setEnabled(true);
         else
