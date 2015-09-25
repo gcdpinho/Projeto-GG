@@ -14,6 +14,7 @@ import Interface.Interface;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -23,6 +24,7 @@ public class XmlArchive
 {
     private Element numOfChildrenSD,metrics,numOfChildren,numOfChildrenAverage,numOfMethods,numOfMethodsSD,numOfMethodsAverage,numOfAttributesSD,numOfAttributesAverage,numOfAttributes,projectMetrics,metricsByClass,numOfClasses,numOfInterfaces, maxDit,linesOfCode,classMetrics;
     private Document document;
+    Random gerador;
     
     /**
      * Método construtor.
@@ -47,6 +49,7 @@ public class XmlArchive
         this.numOfChildren = new Element ("NumberOfChildren");
         this.numOfChildrenAverage = new Element ("Average");
         this.numOfChildrenSD = new Element ("StandartDeviation");
+        this.gerador = new Random();
     }
     
     /**
@@ -84,7 +87,7 @@ public class XmlArchive
         metrics.addContent(classMetrics);
         XMLOutputter xOut = new XMLOutputter();
         try 
-        {   FileWriter fw = new FileWriter(new File("Metrics.xml"));
+        {   FileWriter fw = new FileWriter(new File("Metrics" + gerador.nextInt() + ".xml"));
             xOut.output(document, fw);
         }
         catch (IOException ex) 
