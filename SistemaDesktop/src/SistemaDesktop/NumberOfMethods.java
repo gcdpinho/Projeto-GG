@@ -8,13 +8,22 @@ package SistemaDesktop;
 import java.util.ArrayList;
 
 /**
- *
- * @author Gustavo
+ * Classe responsável por armazenar e calcular a média e desvio padrão do número
+ * de métodos por classe.
+ * 
+ * @author Projeto Fenix
  */
 public class NumberOfMethods extends Metrics
 {
     private double average, standartDeviation;
     
+    /**
+     * Método responsável por calcular a média e desvio padrão do número de
+     * métodos por classe.
+     * 
+     * @param metrics ArrayList - Corresponde à lista com as métricas de cada
+     * arquivo.
+     */
     @Override
     public void calculatesMetric(ArrayList<Class> metrics)
     {
@@ -33,11 +42,24 @@ public class NumberOfMethods extends Metrics
         standartDeviation = Math.sqrt(variance);
     }
     
+    /**
+     * Método getter, responsável por retornar a média do número de métodos por
+     * classe.
+     * 
+     * @return double - Corresponde a média do número de métodos por classe.
+     */
     public double getAverage()
     {
         return average;
     }
     
+    /**
+     * Método getter, responsável por retornar o desvio padrão do número de
+     * métodos por classe.
+     * 
+     * @return double - Corresponde ao desvio padrão do número de métodos por
+     * classe.
+     */
     public double getStandartDeviation()
     {
         return standartDeviation;

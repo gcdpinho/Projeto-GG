@@ -8,18 +8,28 @@ package SistemaDesktop;
 import java.util.ArrayList;
 
 /**
- *
- * @author Gustavo
+ * Classe responsável por armazenar e calcular o número de classes do projeto.
+ * 
+ * @author Projeto Fenix
  */
 public class NumberOfClasses extends Metrics
 {
     private int numberOfClasses;
     
+    /**
+     * Método construtor.
+     */
     public NumberOfClasses()
     {
         numberOfClasses = 0;
     }
     
+    /**
+     * Método responsável por calcular o número de classes do projeto.
+     * 
+     * @param metrics ArrayList - Corresponde à lista com as métricas de cada
+     * arquivo.
+     */
     @Override
     public void calculatesMetric(ArrayList<Class> metrics)
     {
@@ -27,6 +37,11 @@ public class NumberOfClasses extends Metrics
             numberOfClasses += metrics.get(i).getClasses();
     }
     
+    /**
+     * Método getter, responsável por retornar o número de classes do projeto.
+     * 
+     * @return int - Corresponde ao número de classes do projeto.
+     */
     public int getNumberOfClasses()
     {
         return numberOfClasses;

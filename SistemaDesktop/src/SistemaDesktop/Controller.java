@@ -6,13 +6,11 @@
 package SistemaDesktop;
 
 import Interface.Interface;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
- * Classe responsável por gerenciar as funcionalidades do sistema Desktop.
+ * Classe responsável iniciar a interface, o aplicativo.
  * 
- * @author Gustavo
+ * @author Projeto Fenix
  */
 public class Controller 
 {
@@ -25,8 +23,7 @@ public class Controller
     public static void main(String[] args) 
     {   
         Interface inter = new Interface();
-        
-       
+
     }
     
 }

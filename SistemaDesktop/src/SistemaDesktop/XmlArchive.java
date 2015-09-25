@@ -6,8 +6,9 @@
 package SistemaDesktop;
 
 /**
- *
- * @author João Pedro Bretanha
+ * Classe responsável pela estruturação e geração do arquvo XML.
+ * 
+ * @author Projeto Fenix
  */
 import Interface.Interface;
 import java.io.File;
@@ -22,7 +23,10 @@ public class XmlArchive
 {
     private Element numOfChildrenSD,metrics,numOfChildren,numOfChildrenAverage,numOfMethods,numOfMethodsSD,numOfMethodsAverage,numOfAttributesSD,numOfAttributesAverage,numOfAttributes,projectMetrics,metricsByClass,numOfClasses,numOfInterfaces, maxDit,linesOfCode,classMetrics;
     private Document document;
-
+    
+    /**
+     * Método construtor.
+     */
     public XmlArchive()
     {
         this.metrics = new Element("Metrics");
@@ -44,6 +48,12 @@ public class XmlArchive
         this.numOfChildrenAverage = new Element ("Average");
         this.numOfChildrenSD = new Element ("StandartDeviation");
     }
+    
+    /**
+     * Método responsável pela geração do XML.
+     * 
+     * @param inter Interface - Corresponde à interface que contem as métricas.
+     */
     public void generateXML(Interface inter)
     {
         numOfClasses.setText(Integer.toString(inter.getNumberOfClasses().getNumberOfClasses()));

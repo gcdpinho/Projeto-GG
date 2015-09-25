@@ -12,13 +12,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 /**
- * Classe responsável por percorrer o diretório e retornar os arquivos .java
- * e gerar métricas desses arquivos.
+ * Classe responsável por percorrer o diretório e retornar os arquivos .java,
+ * assim como realizar alterações necessárias, e por último, gerar as métricas 
+ * desses arquivos.
  * 
- * @author Gustavo
+ * @author Projeto Fenix
  */
 public class Project 
 {
@@ -38,6 +38,9 @@ public class Project
     
     /**
      * Método responsável por percorrer uma pasta e encontrar os arquivos .java.
+     * 
+     * @return boolean - Corresponde ao teste de ter ou não encontrado algum
+     * arquivo .java.
      */
     public boolean getFilesFolder() 
     {  
@@ -61,36 +64,6 @@ public class Project
         
     }
     
-    /**
-     * Método responsável por percorrer o raiz do projeto e encontrar os
-     * arquivos .java.
-     *//*
-    public void getFilesProject() 
-    {       
-        JFileChooser fc;
-        fc = new JFileChooser();  
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int res = fc.showOpenDialog(null);  
-        if(res == JFileChooser.APPROVE_OPTION)
-        {   File diretory = fc.getSelectedFile();
-            File[] folders = diretory.listFiles();
-            boolean flag = false;
-            for (int i=0; i<folders.length; i++)
-            {   File subPaste = folders[i];
-                //pasta src do projeto, raiz da árvore
-                if(subPaste.getName().equals("src"))
-                {   searchJava(subPaste);
-                    flag = true;
-                }
-            }
-            if(!flag)
-                JOptionPane.showMessageDialog(null, "Você não selecionou um projeto Java."); 
-            
-       }
-       else
-            JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório."); 
-    }
-    */
     /**
      * Método responsável por auxiliar o getFilesProject na busca pelos arquivos
      * .java na pasta raiz do projeto.
@@ -205,6 +178,13 @@ public class Project
         }
     }
     
+    /**
+     * Método responsável por testar se ainda há comentário no arquivo.
+     * 
+     * @param file String - Corresponde ao arquivo a ser testado.
+     * 
+     * @return boolean - Corresponde à resposta do teste.
+     */
     private boolean testComment(String file)
     {
         for (int i=0; i<file.length()-1; i++)

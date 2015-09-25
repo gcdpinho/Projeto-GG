@@ -8,18 +8,29 @@ package SistemaDesktop;
 import java.util.ArrayList;
 
 /**
- *
- * @author Gustavo
+ * Classes responsável por armazenar e calcular o número de interfaces do
+ * projeto.
+ * 
+ * @author Projeto Fenix
  */
 public class NumberOfInterfaces extends Metrics
 {
     private int numberOfInterface;
     
+    /**
+     * Método construtor.
+     */
     public NumberOfInterfaces()
     {
         numberOfInterface = 0;
     }
     
+    /**
+     * Método responsável por calcular o número de interfaces do projeto.
+     * 
+     * @param metrics ArrayList - Corresponde à lista com as métricas de cada
+     * arquivo.
+     */
     @Override
     public void calculatesMetric(ArrayList<Class> metrics)
     {
@@ -27,6 +38,12 @@ public class NumberOfInterfaces extends Metrics
             numberOfInterface += metrics.get(i).getInterfaces();
     }
     
+    /**
+     * Método getter, responsável por retornar o número de interfaces do
+     * projeto.
+     * 
+     * @return int - Corresponde ao número de interfaces do projeto.
+     */
     public int getNumberOfInterface()
     {
         return numberOfInterface;

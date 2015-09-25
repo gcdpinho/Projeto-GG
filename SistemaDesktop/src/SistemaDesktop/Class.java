@@ -8,7 +8,7 @@ package SistemaDesktop;
 /**
  * Classe responsável por armazenar as métricas de cada arquivo encontrado.
  * 
- * @author Gustavo
+ * @author Projeto Fenix
  */
 public class Class 
 {   

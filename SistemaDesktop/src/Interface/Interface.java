@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Gustavo
+ * Classe responsável por realizar a interface entre o programa e o usuário.
+ * 
+ * @author Projeto Fenix
  */
 public class Interface extends javax.swing.JFrame 
 {   
@@ -32,44 +33,92 @@ public class Interface extends javax.swing.JFrame
     private NumberOfAttributes numberOfAttributes;
     private NumberOfMethods numberOfMethods;
     private NumberOfChildren numberOfChildren;
-
+    
+    /**
+     * Método getter, responsável por retornar a classe que contém o número de 
+     * classes do projeto.
+     * 
+     * @return NumberOfClasses - Corresponde à classe que contém o número de
+     * classes do projeto.
+     */
     public NumberOfClasses getNumberOfClasses() 
     {
         return numberOfClasses;
     }
-
+    
+    /**
+     * Método getter, responsável por retornar a classe que contém o número de 
+     * interfaces do projeto.
+     * 
+     * @return NumberOfInterfaces - Corresponde à classe que contém o número de
+     * interfaces do projeto.
+     */
     public NumberOfInterfaces getNumberOfInterfaces() 
     {
         return numberOfInterfaces;
     }
-
+    
+    /**
+     * Método getter, responsável por retornar a classe que contém o dit máximo 
+     * do projeto.
+     * 
+     * @return MaxDit - Corresponde à classe que contém o dit máximo do projeto.
+     */
     public MaxDit getMaxDit() 
     {
         return maxDit;
     }
-
+    
+    /**
+     * Método getter, responsável por retornar a classe que contém o número de 
+     * linhas do projeto.
+     * 
+     * @return LinesOfCode - Corresponde à classe que contém o número de linhas 
+     * do projeto.
+     */
     public LinesOfCode getLinesOfCode() 
     {
         return linesOfCode;
     }
-
+    
+    /**
+     * Método getter, responsável por retornar a classe que contém o número de 
+     * atributos do projeto.
+     * 
+     * @return NumberOfAttributes - Corresponde à classe que contém o número de
+     * atributos do projeto.
+     */
     public NumberOfAttributes getNumberOfAttributes() 
     {
         return numberOfAttributes;
     }
-
+    
+    /**
+     * Método getter, responsável por retornar a classe que contém o número de 
+     * métodos do projeto.
+     * 
+     * @return NumberOfMethods - Corresponde à classe que contém o número de
+     * métodos do projeto.
+     */
     public NumberOfMethods getNumberOfMethods() 
     {
         return numberOfMethods;
     }
-
+    
+    /**
+     * Método getter, responsável por retornar a classe que contém o número de 
+     * filhos do projeto.
+     * 
+     * @return NumberOfChildren - Corresponde à classe que contém o número de
+     * filhos do projeto.
+     */
     public NumberOfChildren getNumberOfChildren() 
     {
         return numberOfChildren;
     }
 
     /**
-     * Classe responsável pela interface entre o usuário e o programa.
+     * Método construtor.
      */
     public Interface() 
     {
@@ -209,7 +258,12 @@ public class Interface extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Método responsável por realizar o cálculo das métricas.
+     * 
+     * @param evt - Corresponde ao clique do mouse.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         try 
@@ -238,7 +292,12 @@ public class Interface extends javax.swing.JFrame
         {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    /**
+     * Método responsável por mostrar o resultado no log.
+     * 
+     * @param evt - Corresponde ao clique do mouse. 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         jTextArea1.setText("");
@@ -257,7 +316,13 @@ public class Interface extends javax.swing.JFrame
         jTextArea1.append("\n--------------------------------------------------------");
         jTextArea1.append(String.format("\nNúmero de filhos\nMédia: %.02f\nDesvio padrão: %.02f", numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation()));
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    /**
+     * Método responsável por percorrer o diretório e encontrar os arquivos
+     * .java.
+     * 
+     * @param evt - Corresponde ao clique do mouse.
+     */
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
         
         if (project.getFilesFolder())
@@ -265,17 +330,32 @@ public class Interface extends javax.swing.JFrame
         else
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
     }//GEN-LAST:event_jMenuItem1MousePressed
-
+    
+    /**
+     * Método responsável por informar os desenvolvedores do projeto.
+     * 
+     * @param evt - Corresponde ao clique do mouse.
+     */
     private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
         
         JOptionPane.showMessageDialog(null, "Esse trabalho foi desenvolvido por:\n- Gustavo Pinho\n- João Pedro Bretanha\n- Jean Antunes\n- Ândrio Araujo\n- Felipe Prestes", "Informação - Desenvolvedores", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_jMenuItem3MousePressed
-
+    
+    /**
+     * Método responsável por informar sobre a aplicação.
+     * 
+     * @param evt - Corresponde ao clique do mouse.
+     */
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
        
         JOptionPane.showMessageDialog(null, "O sistema analisa um conjunto de arquivos .java e gera algumas métricas, definidas no escopo da disciplina de \nDesenvolvimento de Software, lecionada pelos professores Paulo Ferreira e Lisane Brisolara, em 2015/2.", "Informação - Aplicação", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_jMenuItem4MousePressed
-
+    
+    /**
+     * Método responsável por gerar o arquivo XML.
+     * 
+     * @param evt - Corresponde ao clique do mouse.
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
         XmlArchive xml = new XmlArchive();
@@ -298,4 +378,5 @@ public class Interface extends javax.swing.JFrame
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
+
 }

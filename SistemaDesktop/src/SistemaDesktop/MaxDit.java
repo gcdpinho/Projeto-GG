@@ -8,13 +8,20 @@ package SistemaDesktop;
 import java.util.ArrayList;
 
 /**
- *
- * @author Gustavo
+ * Classe responsável por armazenar e calcular o dit máximo do projeto.
+ * 
+ * @author Projeto Fenix
  */
 public class MaxDit extends Metrics
 {
     private int maxDit;
     
+     /**
+     * Método responsável por calcular o dit máximo do projeto.
+     * 
+     * @param metrics ArrayList - Corresponde à lista com as métricas de cada
+     * arquivo.
+     */
     @Override
     public void calculatesMetric(ArrayList<Class> metrics)
     {
@@ -24,6 +31,11 @@ public class MaxDit extends Metrics
                 maxDit = metrics.get(i).getDit();
     }
     
+    /**
+     * Método getter, responsável por retornar o dit máximo do projeto.
+     * 
+     * @return int - Corresponde ao dit máximo do projeto.
+     */
     public int getMaxDit()
     {
         return maxDit;

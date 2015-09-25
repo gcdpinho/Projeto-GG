@@ -8,18 +8,28 @@ package SistemaDesktop;
 import java.util.ArrayList;
 
 /**
- *
- * @author Gustavo
+ * Classe responsável por armazenar e calcular as linhas de código do projeto.
+ * 
+ * @author Projeto Fenix
  */
 public class LinesOfCode extends Metrics
 {
     private int linesOfCode;
     
+    /**
+     * Método construtor.
+     */
     public LinesOfCode()
     {
         linesOfCode = 0;
     }
     
+    /**
+     * Método responsável por calcular o número de linhas do projeto.
+     * 
+     * @param metrics ArrayList - Corresponde à lista com as métricas de cada
+     * arquivo.
+     */
     @Override
     public void calculatesMetric(ArrayList<Class> metrics)
     {   
@@ -29,6 +39,11 @@ public class LinesOfCode extends Metrics
         }
     }   
     
+    /**
+     * Método getter, responsável por retornar as linhas de código do projeto.
+     * 
+     * @return int - Corresponde ao número de linhas do projeto.
+     */
     public int getLinesOfCode() 
     {
         return linesOfCode;
