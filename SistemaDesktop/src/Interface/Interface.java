@@ -273,7 +273,7 @@ public class Interface extends javax.swing.JFrame
 
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
        
-        JOptionPane.showMessageDialog(null, "O sistema analisa um conjunto de arquivos .java e gera algumas métricas, definidas no escopo da discplina de \nDesenvolvimento de Software, lecionada pelos professores Paulo Ferreira e Lisane Brisolara, em 2015/2.", "Informação - Aplicação", JOptionPane.INFORMATION_MESSAGE); 
+        JOptionPane.showMessageDialog(null, "O sistema analisa um conjunto de arquivos .java e gera algumas métricas, definidas no escopo da disciplina de \nDesenvolvimento de Software, lecionada pelos professores Paulo Ferreira e Lisane Brisolara, em 2015/2.", "Informação - Aplicação", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_jMenuItem4MousePressed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

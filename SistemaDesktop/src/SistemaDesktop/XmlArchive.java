@@ -31,7 +31,7 @@ public class XmlArchive
         this.metricsByClass = new Element ("MetricsByClass");
         this.numOfClasses = new Element ("NumberOfClasses");
         this.numOfInterfaces = new Element ("NumberOfInterfaces");
-        this.maxDit = new Element ("MaximunDIT");
+        this.maxDit = new Element ("MaximumDIT");
         this.linesOfCode = new Element("LinesOfCode");
         this.classMetrics = new Element ("ClassMetrics");
         this.numOfAttributes = new Element ("NumberOfAttributes");
