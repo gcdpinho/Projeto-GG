@@ -14,8 +14,10 @@ import SistemaDesktop.NumberOfInterfaces;
 import SistemaDesktop.NumberOfMethods;
 import SistemaDesktop.Project;
 import SistemaDesktop.XmlArchive;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -150,12 +152,12 @@ public class Interface extends javax.swing.JFrame
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        b_gerarXML = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        j_selectIFile = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -184,6 +186,7 @@ public class Interface extends javax.swing.JFrame
         jScrollPane1.setBounds(20, 130, 310, 140);
 
         jButton1.setText("Calcular Métricas");
+        jButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
         jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,15 +206,15 @@ public class Interface extends javax.swing.JFrame
         getContentPane().add(jButton2);
         jButton2.setBounds(350, 180, 160, 40);
 
-        jButton3.setText("Gerar XML");
-        jButton3.setEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        b_gerarXML.setText("Gerar XML");
+        b_gerarXML.setEnabled(false);
+        b_gerarXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                b_gerarXMLActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(350, 230, 160, 40);
+        getContentPane().add(b_gerarXML);
+        b_gerarXML.setBounds(350, 230, 160, 40);
 
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title.png"))); // NOI18N
         getContentPane().add(title);
@@ -223,13 +226,13 @@ public class Interface extends javax.swing.JFrame
 
         jMenu1.setText("Arquivo");
 
-        jMenuItem1.setText("Selecionar Pasta");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        j_selectIFile.setText("Selecionar Pasta");
+        j_selectIFile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
+                j_selectIFileMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(j_selectIFile);
 
         jMenuBar1.add(jMenu1);
 
@@ -243,6 +246,7 @@ public class Interface extends javax.swing.JFrame
         });
         jMenu2.add(jMenuItem3);
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Button_Reminder_Icon_16.png"))); // NOI18N
         jMenuItem4.setText("Aplicação");
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -285,7 +289,7 @@ public class Interface extends javax.swing.JFrame
             else
                 jTextArea1.setText("Foram encontrados "+classMetrics.size()+" arquivos.");
             jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
+            b_gerarXML.setEnabled(true);
         } 
         catch (IOException ex) 
         {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
@@ -322,13 +326,13 @@ public class Interface extends javax.swing.JFrame
      * 
      * @param evt - Corresponde ao clique do mouse.
      */
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+    private void j_selectIFileMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j_selectIFileMousePressed
         project = new Project();
         if (project.getFilesFolder())
             jButton1.setEnabled(true);
         else
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
-    }//GEN-LAST:event_jMenuItem1MousePressed
+    }//GEN-LAST:event_j_selectIFileMousePressed
     
     /**
      * Método responsável por informar os desenvolvedores do projeto.
@@ -355,8 +359,35 @@ public class Interface extends javax.swing.JFrame
      * 
      * @param evt - Corresponde ao clique do mouse.
      */
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String answer;
+    private void b_gerarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_gerarXMLActionPerformed
+        
+        JFileChooser saveFile = new JFileChooser(); 
+        //nome por default do xml, mesmo nome do projeto
+        saveFile.setSelectedFile(new File("XML_"+project.getNameProject()));
+        
+        int resultado = saveFile.showSaveDialog(this);
+        File file = saveFile.getSelectedFile();
+        
+        
+        if (resultado == JFileChooser.CANCEL_OPTION) 
+           return;
+        else{    
+            XmlArchive xml = new XmlArchive(file.getName());
+            xml.generateXML(this, file.getName(), file);
+            jTextArea1.setText("O arquivo xml foi criado com sucesso.");
+        }
+        
+        //saveFile.setSelectedFile(new File("home\\jean\\xml_project.xml"));
+  
+    //File salvarArquivoEscolhido = salvandoArquivo.getSelectedFile();
+    
+        /*String answer;
+        
+        else if(file.getName().equals("")){
+            
+        }
+        
+        
         answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
         if (answer == null || answer.equals("")){
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum nome para o projeto", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
@@ -364,22 +395,22 @@ public class Interface extends javax.swing.JFrame
             XmlArchive xml = new XmlArchive(answer);
             xml.generateXML(this, answer);
             jTextArea1.setText("O arquivo xml foi criado com sucesso.");
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        }*/
+    }//GEN-LAST:event_b_gerarXMLActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b_gerarXML;
     private javax.swing.JLabel background;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JMenuItem j_selectIFile;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 

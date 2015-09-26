@@ -58,7 +58,7 @@ public class XmlArchive
      * 
      * @param inter Interface - Corresponde à interface que contem as métricas.
      */
-    public void generateXML(Interface inter, String projectName)
+    public void generateXML(Interface inter, String projectName, File file)
     {
         numOfClasses.setText(Integer.toString(inter.getNumberOfClasses().getNumberOfClasses()));
         numOfInterfaces.setText(Integer.toString(inter.getNumberOfInterfaces().getNumberOfInterface()));
@@ -88,14 +88,13 @@ public class XmlArchive
         metrics.addContent(classMetrics);
         XMLOutputter xOut = new XMLOutputter();
         try 
-        {   FileWriter fw = new FileWriter(new File(projectName + ".xml"));
+        {   FileWriter fw = new FileWriter(file +".xml");
             xOut.output(document, fw);
         }
         catch (IOException ex) 
         {   JOptionPane.showMessageDialog(null, "Não foi possível gerar o arquivo xml, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE);
         }    
     }
-    
 }
 
 
