@@ -14,9 +14,20 @@ import SistemaDesktop.NumberOfInterfaces;
 import SistemaDesktop.NumberOfMethods;
 import SistemaDesktop.Project;
 import SistemaDesktop.XmlArchive;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -150,7 +161,7 @@ public class Interface extends javax.swing.JFrame
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jCalculateMetrics = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         b_gerarXML = new javax.swing.JButton();
         title = new javax.swing.JLabel();
@@ -178,6 +189,7 @@ public class Interface extends javax.swing.JFrame
         jTextArea1.setText("Não sabe o que fazer? \nSelecione um diretório clicando em Arquivo->Selecionar Entrada.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setAutoscrolls(false);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextArea1.setFocusable(false);
         jTextArea1.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(jTextArea1);
@@ -185,16 +197,16 @@ public class Interface extends javax.swing.JFrame
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 130, 310, 140);
 
-        jButton1.setText("Calcular Métricas");
-        jButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jCalculateMetrics.setText("Calcular Métricas");
+        jCalculateMetrics.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
+        jCalculateMetrics.setEnabled(false);
+        jCalculateMetrics.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jCalculateMetricsActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(350, 130, 160, 40);
+        getContentPane().add(jCalculateMetrics);
+        jCalculateMetrics.setBounds(350, 130, 160, 40);
 
         jButton2.setText("Mostrar Resultados");
         jButton2.setEnabled(false);
@@ -226,6 +238,7 @@ public class Interface extends javax.swing.JFrame
 
         jMenu1.setText("Arquivo");
 
+        j_selectIFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add147.png"))); // NOI18N
         j_selectIFile.setText("Selecionar Pasta");
         j_selectIFile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -238,6 +251,7 @@ public class Interface extends javax.swing.JFrame
 
         jMenu2.setText("Sobre");
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/team2.png"))); // NOI18N
         jMenuItem3.setText("Desenvolvedores");
         jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -246,7 +260,7 @@ public class Interface extends javax.swing.JFrame
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Button_Reminder_Icon_16.png"))); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/written.png"))); // NOI18N
         jMenuItem4.setText("Aplicação");
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -267,8 +281,8 @@ public class Interface extends javax.swing.JFrame
      * 
      * @param evt - Corresponde ao clique do mouse.
      */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void jCalculateMetricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateMetricsActionPerformed
+       
         try 
         {   project.firstStep();
             project.secondStep();
@@ -294,7 +308,7 @@ public class Interface extends javax.swing.JFrame
         catch (IOException ex) 
         {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jCalculateMetricsActionPerformed
     
     /**
      * Método responsável por mostrar o resultado no log.
@@ -329,7 +343,7 @@ public class Interface extends javax.swing.JFrame
     private void j_selectIFileMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j_selectIFileMousePressed
         project = new Project();
         if (project.getFilesFolder())
-            jButton1.setEnabled(true);
+            jCalculateMetrics.setEnabled(true);
         else
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
     }//GEN-LAST:event_j_selectIFileMousePressed
@@ -401,8 +415,8 @@ public class Interface extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_gerarXML;
     private javax.swing.JLabel background;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jCalculateMetrics;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
