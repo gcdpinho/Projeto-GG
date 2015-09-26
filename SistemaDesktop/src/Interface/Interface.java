@@ -377,42 +377,28 @@ public class Interface extends javax.swing.JFrame
     private void b_gerarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_gerarXMLActionPerformed
         
         JFileChooser saveFile = new JFileChooser(); 
-        String nameFile = project.getNameProject();
-        nameFile = nameFile.replaceAll("\\s+", "");
-        //nome por default do xml, mesmo nome do projeto
-        saveFile.setSelectedFile(new File("XML_"+nameFile));
-        
-        int resultado = saveFile.showSaveDialog(this);
-        File file = saveFile.getSelectedFile();
-        
-        
-        if (resultado == JFileChooser.CANCEL_OPTION) 
-           return;
-        else{    
-            XmlArchive xml = new XmlArchive(nameFile);
-            xml.generateXML(this, nameFile, file);
-            jTextArea1.setText("O arquivo xml foi criado com sucesso.");
-        }
-        
-        //saveFile.setSelectedFile(new File("home\\jean\\xml_project.xml"));
-  
-    //File salvarArquivoEscolhido = salvandoArquivo.getSelectedFile();
-    
-        /*String answer;
-        
-        else if(file.getName().equals("")){
-            
-        }
-        
-        
-        answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
+        /*String nameFile = project.getNameProject();
+        nameFile = nameFile.replaceAll("\\s+", "");*/
+        String answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
         if (answer == null || answer.equals("")){
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum nome para o projeto", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
         }else{
-            XmlArchive xml = new XmlArchive(answer);
-            xml.generateXML(this, answer);
-            jTextArea1.setText("O arquivo xml foi criado com sucesso.");
-        }*/
+            //nome por default do xml, mesmo nome do projeto
+            answer = answer.replaceAll("\\s+", "");
+            saveFile.setSelectedFile(new File("XML_"+answer));
+
+            int resultado = saveFile.showSaveDialog(this);
+            File file = saveFile.getSelectedFile();
+
+
+            if (resultado == JFileChooser.CANCEL_OPTION) 
+               return;
+            else{    
+                XmlArchive xml = new XmlArchive(answer);
+                xml.generateXML(this, answer, file);
+                jTextArea1.setText("O arquivo xml foi criado com sucesso.");
+            }
+        }
     }//GEN-LAST:event_b_gerarXMLActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
