@@ -304,6 +304,7 @@ public class Interface extends javax.swing.JFrame
                 jTextArea1.setText("Foram encontrados "+classMetrics.size()+" arquivos.");
             jButton2.setEnabled(true);
             b_gerarXML.setEnabled(true);
+            jCalculateMetrics.setEnabled(false);
         } 
         catch (IOException ex) 
         {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
