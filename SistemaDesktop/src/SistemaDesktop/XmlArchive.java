@@ -57,6 +57,10 @@ public class XmlArchive
      * Método responsável pela geração do XML.
      * 
      * @param inter Interface - Corresponde à interface que contem as métricas.
+     * 
+     * @param projectName String - Corresponde ao nome do projeto.
+     * 
+     * @param file File - Corresponde ao arquivo a ser salvo.
      */
     public void generateXML(Interface inter, String projectName, File file)
     {

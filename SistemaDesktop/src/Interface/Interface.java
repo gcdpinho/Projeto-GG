@@ -14,20 +14,9 @@ import SistemaDesktop.NumberOfInterfaces;
 import SistemaDesktop.NumberOfMethods;
 import SistemaDesktop.Project;
 import SistemaDesktop.XmlArchive;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -135,17 +124,9 @@ public class Interface extends javax.swing.JFrame
      */
     public Interface() 
     {
-        initComponents();
-        numberOfClasses = new NumberOfClasses();
-        numberOfInterfaces = new NumberOfInterfaces();
-        maxDit = new MaxDit();
-        linesOfCode = new LinesOfCode();
-        numberOfAttributes = new NumberOfAttributes();
-        numberOfMethods = new NumberOfMethods();
-        numberOfChildren = new NumberOfChildren();
-       // project = new Project();
+        initComponents(); 
         
-        this.setSize(535, 360);
+        this.setSize(969, 580);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -161,14 +142,14 @@ public class Interface extends javax.swing.JFrame
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jCalculateMetrics = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        b_gerarXML = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        j_selectIFile = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -186,27 +167,25 @@ public class Interface extends javax.swing.JFrame
         jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Não sabe o que fazer? \nSelecione um diretório clicando em Arquivo->Selecionar Entrada.");
+        jTextArea1.setText("Não sabe o que fazer? \n\nSelecione um diretório clicando em Arquivo->Selecionar Pasta.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setAutoscrolls(false);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextArea1.setFocusable(false);
         jTextArea1.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 130, 310, 140);
+        jScrollPane1.setBounds(600, 130, 330, 360);
 
-        jCalculateMetrics.setText("Calcular Métricas");
-        jCalculateMetrics.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
-        jCalculateMetrics.setEnabled(false);
-        jCalculateMetrics.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Calcular Métricas");
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCalculateMetricsActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jCalculateMetrics);
-        jCalculateMetrics.setBounds(350, 130, 160, 40);
+        getContentPane().add(jButton1);
+        jButton1.setBounds(70, 190, 160, 40);
 
         jButton2.setText("Mostrar Resultados");
         jButton2.setEnabled(false);
@@ -216,36 +195,36 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(350, 180, 160, 40);
+        jButton2.setBounds(70, 240, 160, 40);
 
-        b_gerarXML.setText("Gerar XML");
-        b_gerarXML.setEnabled(false);
-        b_gerarXML.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Gerar XML");
+        jButton3.setEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_gerarXMLActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(b_gerarXML);
-        b_gerarXML.setBounds(350, 230, 160, 40);
+        getContentPane().add(jButton3);
+        jButton3.setBounds(70, 290, 160, 40);
 
-        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title.png"))); // NOI18N
+        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title1.png"))); // NOI18N
         getContentPane().add(title);
-        title.setBounds(40, 30, 460, 70);
+        title.setBounds(600, 10, 510, 90);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.jpg"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background1.png"))); // NOI18N
         getContentPane().add(background);
-        background.setBounds(-240, -40, 810, 410);
+        background.setBounds(0, -40, 1160, 590);
 
         jMenu1.setText("Arquivo");
 
-        j_selectIFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add147.png"))); // NOI18N
-        j_selectIFile.setText("Selecionar Pasta");
-        j_selectIFile.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add147.png"))); // NOI18N
+        jMenuItem1.setText("Selecionar Pasta");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                j_selectIFileMousePressed(evt);
+                jMenuItem1MousePressed(evt);
             }
         });
-        jMenu1.add(j_selectIFile);
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -281,8 +260,8 @@ public class Interface extends javax.swing.JFrame
      * 
      * @param evt - Corresponde ao clique do mouse.
      */
-    private void jCalculateMetricsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateMetricsActionPerformed
-       
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         try 
         {   project.firstStep();
             project.secondStep();
@@ -302,14 +281,15 @@ public class Interface extends javax.swing.JFrame
                 jTextArea1.setText("Foi encontrado "+classMetrics.size()+" arquivo.");
             else
                 jTextArea1.setText("Foram encontrados "+classMetrics.size()+" arquivos.");
+            
             jButton2.setEnabled(true);
-            b_gerarXML.setEnabled(true);
-            jCalculateMetrics.setEnabled(false);
+            jButton3.setEnabled(true);
+            jButton1.setEnabled(false);
         } 
         catch (IOException ex) 
         {   JOptionPane.showMessageDialog(null, "Não foi possível calcular as métricas, tente novamente.", "ERRO", JOptionPane.ERROR_MESSAGE); 
         }
-    }//GEN-LAST:event_jCalculateMetricsActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * Método responsável por mostrar o resultado no log.
@@ -341,13 +321,25 @@ public class Interface extends javax.swing.JFrame
      * 
      * @param evt - Corresponde ao clique do mouse.
      */
-    private void j_selectIFileMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j_selectIFileMousePressed
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+        
         project = new Project();
+        numberOfClasses = new NumberOfClasses();
+        numberOfInterfaces = new NumberOfInterfaces();
+        maxDit = new MaxDit();
+        linesOfCode = new LinesOfCode();
+        numberOfAttributes = new NumberOfAttributes();
+        numberOfMethods = new NumberOfMethods();
+        numberOfChildren = new NumberOfChildren();
+        
         if (project.getFilesFolder())
-            jCalculateMetrics.setEnabled(true);
+        {   jButton1.setEnabled(true);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+        }
         else
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
-    }//GEN-LAST:event_j_selectIFileMousePressed
+    }//GEN-LAST:event_jMenuItem1MousePressed
     
     /**
      * Método responsável por informar os desenvolvedores do projeto.
@@ -356,7 +348,7 @@ public class Interface extends javax.swing.JFrame
      */
     private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
         
-        JOptionPane.showMessageDialog(null, "Esse trabalho foi desenvolvido por:\n- Gustavo Pinho\n- João Pedro Bretanha\n- Jean Antunes\n- Ândrio Araujo\n- Felipe Prestes", "Informação - Desenvolvedores", JOptionPane.INFORMATION_MESSAGE); 
+        JOptionPane.showMessageDialog(null, "Esse trabalho foi desenvolvido por:\n\n- Gustavo Pinho\n- João Pedro Bretanha\n- Jean Antunes\n- Ândrio Araujo\n- Felipe Prestes", "Informação - Desenvolvedores", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_jMenuItem3MousePressed
     
     /**
@@ -374,46 +366,44 @@ public class Interface extends javax.swing.JFrame
      * 
      * @param evt - Corresponde ao clique do mouse.
      */
-    private void b_gerarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_gerarXMLActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
         JFileChooser saveFile = new JFileChooser(); 
-        /*String nameFile = project.getNameProject();
-        nameFile = nameFile.replaceAll("\\s+", "");*/
         String answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
-        if (answer == null || answer.equals("")){
+        
+        if (answer == null || answer.equals(""))
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum nome para o projeto", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
-        }else{
-            //nome por default do xml, mesmo nome do projeto
+        else
+        {   //nome por default do xml, mesmo nome do projeto
             answer = answer.replaceAll("\\s+", "");
             saveFile.setSelectedFile(new File("XML_"+answer));
 
             int resultado = saveFile.showSaveDialog(this);
             File file = saveFile.getSelectedFile();
 
-
             if (resultado == JFileChooser.CANCEL_OPTION) 
                return;
-            else{    
-                XmlArchive xml = new XmlArchive(answer);
+            else
+            {   XmlArchive xml = new XmlArchive(answer);
                 xml.generateXML(this, answer, file);
                 jTextArea1.setText("O arquivo xml foi criado com sucesso.");
             }
         }
-    }//GEN-LAST:event_b_gerarXMLActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton b_gerarXML;
     private javax.swing.JLabel background;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jCalculateMetrics;
+    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JMenuItem j_selectIFile;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 

@@ -25,7 +25,7 @@ public class Project
     private ArrayList<File> files;
     private ArrayList<Class> metrics;
     private ArrayList<String> filesNoComment;
-    private String nameProject;
+    
     /**
      * Método construtor.
      */
@@ -34,7 +34,6 @@ public class Project
         files = new ArrayList<>();
         metrics = new ArrayList<>();
         filesNoComment = new ArrayList<>();
-        nameProject = new String();
     }
     
     /**
@@ -47,15 +46,20 @@ public class Project
     {  
         JFileChooser fc;
         fc = new JFileChooser();
-        fc.setFileFilter(new javax.swing.filechooser.FileFilter(){
-            public boolean accept(File f) {
+        fc.setFileFilter(new javax.swing.filechooser.FileFilter()
+        {
+            @Override
+            public boolean accept(File f) 
+            {
                 return f.isDirectory();
             }
 
-            public String getDescription() {
+            @Override
+            public String getDescription() 
+            {
                 return "Projetos Java";
             }
-        
+       
         });
         
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -68,38 +72,14 @@ public class Project
                 searchJava(folders[i]);
             if (files.isEmpty())
                 return false;
-            else{
-                setNameProject(diretory.getName().toString());
+            else
                 return true;
-            }
         }
         else
             return false;
-        
-        
-        
+          
     }
-    
-    /**
-     * Método setter, responsável por setar o nome do Projeto Java selecionado.
-     * 
-     * @param nameProject - Corresponde ao nome do projeto.
-     */
-    public void setNameProject(String nameProject)
-    {
-        this.nameProject = nameProject;
-    }
-    
-    /**
-     * Método getter, responsável por pegar o nome do Projeto Java selecionado.
-     * 
-     * @return nameProject - Corresponde ao nome do projeto.
-     */
-    
-    public String getNameProject()
-    {
-        return nameProject;
-    }
+ 
     /**
      * Método responsável por auxiliar o getFilesProject na busca pelos arquivos
      * .java na pasta raiz do projeto.
