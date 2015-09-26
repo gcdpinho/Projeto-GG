@@ -376,8 +376,10 @@ public class Interface extends javax.swing.JFrame
     private void b_gerarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_gerarXMLActionPerformed
         
         JFileChooser saveFile = new JFileChooser(); 
+        String nameFile = project.getNameProject();
+        nameFile = nameFile.replaceAll("\\s+", "");
         //nome por default do xml, mesmo nome do projeto
-        saveFile.setSelectedFile(new File("XML_"+project.getNameProject()));
+        saveFile.setSelectedFile(new File("XML_"+nameFile));
         
         int resultado = saveFile.showSaveDialog(this);
         File file = saveFile.getSelectedFile();
@@ -386,8 +388,8 @@ public class Interface extends javax.swing.JFrame
         if (resultado == JFileChooser.CANCEL_OPTION) 
            return;
         else{    
-            XmlArchive xml = new XmlArchive(file.getName());
-            xml.generateXML(this, file.getName(), file);
+            XmlArchive xml = new XmlArchive(nameFile);
+            xml.generateXML(this, nameFile, file);
             jTextArea1.setText("O arquivo xml foi criado com sucesso.");
         }
         
