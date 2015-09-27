@@ -209,11 +209,11 @@ public class Interface extends javax.swing.JFrame
 
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title1.png"))); // NOI18N
         getContentPane().add(title);
-        title.setBounds(20, 50, 510, 90);
+        title.setBounds(20, 50, 390, 90);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg.jpg"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg2.jpg"))); // NOI18N
         getContentPane().add(background);
-        background.setBounds(0, -290, 1180, 860);
+        background.setBounds(0, -200, 1180, 860);
 
         jMenu1.setText("Arquivo");
 
