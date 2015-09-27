@@ -175,7 +175,7 @@ public class Interface extends javax.swing.JFrame
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(600, 130, 330, 360);
+        jScrollPane1.setBounds(430, 50, 500, 440);
 
         jButton1.setText("Calcular Métricas");
         jButton1.setEnabled(false);
@@ -209,11 +209,11 @@ public class Interface extends javax.swing.JFrame
 
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title1.png"))); // NOI18N
         getContentPane().add(title);
-        title.setBounds(600, 10, 510, 90);
+        title.setBounds(20, 50, 510, 90);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background1.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg.jpg"))); // NOI18N
         getContentPane().add(background);
-        background.setBounds(0, -40, 1160, 590);
+        background.setBounds(0, -290, 1180, 860);
 
         jMenu1.setText("Arquivo");
 
@@ -298,21 +298,22 @@ public class Interface extends javax.swing.JFrame
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        jTextArea1.setText("");
-        jTextArea1.append("Métricas do projeto");
-        jTextArea1.append("\n--------------------------------------------------------");
-        jTextArea1.append("\nNúmero de classes: "+numberOfClasses.getNumberOfClasses());
-        jTextArea1.append("\nNúmero de interfaces: "+numberOfInterfaces.getNumberOfInterface());
-        jTextArea1.append("\nDit Máximo: "+maxDit.getMaxDit());
-        jTextArea1.append("\nLinhas de código: "+linesOfCode.getLinesOfCode());
-        jTextArea1.append("\n--------------------------------------------------------");
-        jTextArea1.append("\nMétricas de classe (média e desvio padrão)");
-        jTextArea1.append("\n--------------------------------------------------------");
-        jTextArea1.append(String.format("\nNúmero de atributos\nMédia: %.02f\nDesvio padrão: %.02f", numberOfAttributes.getAverage(), numberOfAttributes.getStandartDeviation()));
-        jTextArea1.append("\n--------------------------------------------------------");
-        jTextArea1.append(String.format("\nNúmero de métodos\nMédia: %.02f\nDesvio padrão: %.02f", numberOfMethods.getAverage(), numberOfMethods.getStandartDeviation()));
-        jTextArea1.append("\n--------------------------------------------------------");
-        jTextArea1.append(String.format("\nNúmero de filhos\nMédia: %.02f\nDesvio padrão: %.02f", numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation()));
+        jTextArea1.setText("\n");
+        jTextArea1.append("\t\tMétricas do projeto");
+        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("\n\t\tNúmero de classes: "+numberOfClasses.getNumberOfClasses());
+        jTextArea1.append("\n\t\tNúmero de interfaces: "+numberOfInterfaces.getNumberOfInterface());
+        jTextArea1.append("\n\t\tDit Máximo: "+maxDit.getMaxDit());
+        jTextArea1.append("\n\t\tLinhas de código: "+linesOfCode.getLinesOfCode());
+        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("\n\n");
+        jTextArea1.append("\n\t\tMétricas de classe (média e desvio padrão)");
+        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append(String.format("\n\t\tNúmero de atributos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfAttributes.getAverage(), numberOfAttributes.getStandartDeviation()));
+        jTextArea1.append("\n-----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append(String.format("\n\t\tNúmero de métodos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfMethods.getAverage(), numberOfMethods.getStandartDeviation()));
+        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append(String.format("\n\t\tNúmero de filhos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation()));
     }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
@@ -336,6 +337,7 @@ public class Interface extends javax.swing.JFrame
         {   jButton1.setEnabled(true);
             jButton2.setEnabled(false);
             jButton3.setEnabled(false);
+            
         }
         else
             JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
@@ -367,7 +369,7 @@ public class Interface extends javax.swing.JFrame
      * @param evt - Corresponde ao clique do mouse.
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+
         JFileChooser saveFile = new JFileChooser(); 
         String answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
         
