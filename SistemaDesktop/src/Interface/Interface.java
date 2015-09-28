@@ -17,6 +17,7 @@ import SistemaDesktop.XmlArchive;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -177,6 +178,7 @@ public class Interface extends javax.swing.JFrame
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(430, 50, 500, 440);
 
+        jButton1 = new RoundedCornerButton();
         jButton1.setText("Calcular Métricas");
         jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +189,7 @@ public class Interface extends javax.swing.JFrame
         getContentPane().add(jButton1);
         jButton1.setBounds(70, 190, 300, 40);
 
+        jButton2 = new RoundedCornerButton();
         jButton2.setText("Mostrar Resultados");
         jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -197,6 +200,7 @@ public class Interface extends javax.swing.JFrame
         getContentPane().add(jButton2);
         jButton2.setBounds(70, 240, 300, 40);
 
+        jButton_GenerateXml = new RoundedCornerButton();
         jButton_GenerateXml.setText("Gerar XML");
         jButton_GenerateXml.setEnabled(false);
         jButton_GenerateXml.addActionListener(new java.awt.event.ActionListener() {
@@ -369,7 +373,7 @@ public class Interface extends javax.swing.JFrame
      * @param evt - Corresponde ao clique do mouse.
      */
     private void jButton_GenerateXmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GenerateXmlActionPerformed
-
+        
         JFileChooser saveFile = new JFileChooser(); 
         //String answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
         
