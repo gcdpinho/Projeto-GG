@@ -144,7 +144,7 @@ public class Interface extends javax.swing.JFrame
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton_GenerateXml = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -185,7 +185,7 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(70, 190, 160, 40);
+        jButton1.setBounds(70, 190, 300, 40);
 
         jButton2.setText("Mostrar Resultados");
         jButton2.setEnabled(false);
@@ -195,21 +195,21 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(70, 240, 160, 40);
+        jButton2.setBounds(70, 240, 300, 40);
 
-        jButton3.setText("Gerar XML");
-        jButton3.setEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton_GenerateXml.setText("Gerar XML");
+        jButton_GenerateXml.setEnabled(false);
+        jButton_GenerateXml.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton_GenerateXmlActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(70, 290, 160, 40);
+        getContentPane().add(jButton_GenerateXml);
+        jButton_GenerateXml.setBounds(70, 290, 300, 40);
 
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title1.png"))); // NOI18N
         getContentPane().add(title);
-        title.setBounds(20, 50, 390, 90);
+        title.setBounds(50, 50, 390, 90);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg2.jpg"))); // NOI18N
         getContentPane().add(background);
@@ -283,7 +283,7 @@ public class Interface extends javax.swing.JFrame
                 jTextArea1.setText("Foram encontrados "+classMetrics.size()+" arquivos.");
             
             jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
+            jButton_GenerateXml.setEnabled(true);
             jButton1.setEnabled(false);
         } 
         catch (IOException ex) 
@@ -336,7 +336,7 @@ public class Interface extends javax.swing.JFrame
         if (project.getFilesFolder())
         {   jButton1.setEnabled(true);
             jButton2.setEnabled(false);
-            jButton3.setEnabled(false);
+            jButton_GenerateXml.setEnabled(false);
             
         }
         else
@@ -368,36 +368,29 @@ public class Interface extends javax.swing.JFrame
      * 
      * @param evt - Corresponde ao clique do mouse.
      */
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton_GenerateXmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GenerateXmlActionPerformed
 
         JFileChooser saveFile = new JFileChooser(); 
-        String answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
+        //String answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
         
-        if (answer == null || answer.equals(""))
-            JOptionPane.showMessageDialog(null, "Você não escolheu nenhum nome para o projeto", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
-        else
-        {   //nome por default do xml, mesmo nome do projeto
-            answer = answer.replaceAll("\\s+", "");
-            saveFile.setSelectedFile(new File("XML_"+answer));
-
-            int resultado = saveFile.showSaveDialog(this);
-            File file = saveFile.getSelectedFile();
-
-            if (resultado == JFileChooser.CANCEL_OPTION) 
-               return;
-            else
-            {   XmlArchive xml = new XmlArchive(answer);
-                xml.generateXML(this, answer, file);
-                jTextArea1.setText("O arquivo xml foi criado com sucesso.");
-            }
+        int resultado = saveFile.showSaveDialog(this);
+        File file = saveFile.getSelectedFile();
+        
+        if (resultado == JFileChooser.APPROVE_OPTION){
+            XmlArchive xml = new XmlArchive(file.getName());
+            xml.generateXML(this, file.getName(), file);
+            jTextArea1.setText("O arquivo xml foi criado com sucesso.");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        else
+            return;
+
+    }//GEN-LAST:event_jButton_GenerateXmlActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton_GenerateXml;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
