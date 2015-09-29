@@ -147,6 +147,7 @@ public class Interface extends javax.swing.JFrame
         jButton2 = new javax.swing.JButton();
         jButton_GenerateXml = new javax.swing.JButton();
         title = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -211,13 +212,18 @@ public class Interface extends javax.swing.JFrame
         getContentPane().add(jButton_GenerateXml);
         jButton_GenerateXml.setBounds(70, 290, 300, 40);
 
-        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title1.png"))); // NOI18N
+        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/blue2.png"))); // NOI18N
         getContentPane().add(title);
-        title.setBounds(50, 50, 390, 90);
+        title.setBounds(90, 70, 250, 90);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg2.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(-90, 340, 450, 390);
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sem título-1.png"))); // NOI18N
         getContentPane().add(background);
-        background.setBounds(0, -200, 1180, 860);
+        background.setBounds(-10, -310, 1180, 860);
 
         jMenu1.setText("Arquivo");
 
@@ -381,8 +387,10 @@ public class Interface extends javax.swing.JFrame
         File file = saveFile.getSelectedFile();
         
         if (resultado == JFileChooser.APPROVE_OPTION){
-            XmlArchive xml = new XmlArchive(file.getName());
-            xml.generateXML(this, file.getName(), file);
+            String answer = file.getName();
+            answer = answer.replaceAll("\\s+", "");
+            XmlArchive xml = new XmlArchive(answer);
+            xml.generateXML(this, answer, file);
             jTextArea1.setText("O arquivo xml foi criado com sucesso.");
         }
         else
@@ -395,6 +403,7 @@ public class Interface extends javax.swing.JFrame
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_GenerateXml;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
