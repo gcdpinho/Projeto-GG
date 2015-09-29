@@ -14,12 +14,15 @@ import SistemaDesktop.NumberOfInterfaces;
 import SistemaDesktop.NumberOfMethods;
 import SistemaDesktop.Project;
 import SistemaDesktop.XmlArchive;
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  * Classe responsável por realizar a interface entre o programa e o usuário.
@@ -141,11 +144,11 @@ public class Interface extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton_GenerateXml = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         title = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -160,24 +163,6 @@ public class Interface extends javax.swing.JFrame
         setTitle("Sistema Desktop");
         setResizable(false);
         getContentPane().setLayout(null);
-
-        jScrollPane1.setFocusCycleRoot(true);
-        jScrollPane1.setFocusable(false);
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Não sabe o que fazer? \n\nSelecione um diretório clicando em Arquivo->Selecionar Pasta.");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setAutoscrolls(false);
-        jTextArea1.setFocusable(false);
-        jTextArea1.setVerifyInputWhenFocusTarget(false);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(430, 50, 500, 440);
 
         jButton1 = new RoundedCornerButton();
         jButton1.setText("Calcular Métricas");
@@ -211,6 +196,24 @@ public class Interface extends javax.swing.JFrame
         });
         getContentPane().add(jButton_GenerateXml);
         jButton_GenerateXml.setBounds(70, 290, 300, 40);
+
+        jScrollPane1.setFocusCycleRoot(true);
+        jScrollPane1.setFocusable(false);
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Não sabe o que fazer? \n\nSelecione um diretório clicando em Arquivo->Selecionar Pasta.");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setFocusable(false);
+        jTextArea1.setVerifyInputWhenFocusTarget(false);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(430, 50, 510, 430);
 
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/blue2.png"))); // NOI18N
         getContentPane().add(title);
@@ -320,7 +323,7 @@ public class Interface extends javax.swing.JFrame
         jTextArea1.append("\n\t\tMétricas de classe (média e desvio padrão)");
         jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append(String.format("\n\t\tNúmero de atributos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfAttributes.getAverage(), numberOfAttributes.getStandartDeviation()));
-        jTextArea1.append("\n-----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append(String.format("\n\t\tNúmero de métodos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfMethods.getAverage(), numberOfMethods.getStandartDeviation()));
         jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append(String.format("\n\t\tNúmero de filhos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation()));
