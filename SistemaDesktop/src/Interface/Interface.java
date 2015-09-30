@@ -133,6 +133,7 @@ public class Interface extends javax.swing.JFrame
         this.setSize(969, 580);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setTitle("Blue Phoenix");
     }
 
     /**
