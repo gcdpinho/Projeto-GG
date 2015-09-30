@@ -147,6 +147,7 @@ public class Interface extends javax.swing.JFrame
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton_GenerateXml = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         title = new javax.swing.JLabel();
@@ -173,7 +174,7 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(70, 190, 300, 40);
+        jButton1.setBounds(70, 230, 300, 40);
 
         jButton2 = new RoundedCornerButton();
         jButton2.setText("Mostrar Resultados");
@@ -184,7 +185,7 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(70, 240, 300, 40);
+        jButton2.setBounds(70, 290, 300, 40);
 
         jButton_GenerateXml = new RoundedCornerButton();
         jButton_GenerateXml.setText("Gerar XML");
@@ -195,7 +196,17 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton_GenerateXml);
-        jButton_GenerateXml.setBounds(70, 290, 300, 40);
+        jButton_GenerateXml.setBounds(70, 350, 300, 40);
+
+        jButton3 = new RoundedCornerButton();
+        jButton3.setText("Selecionar Entrada");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton3MousePressed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(70, 170, 300, 40);
 
         jScrollPane1.setFocusCycleRoot(true);
         jScrollPane1.setFocusable(false);
@@ -217,14 +228,13 @@ public class Interface extends javax.swing.JFrame
 
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/blue2.png"))); // NOI18N
         getContentPane().add(title);
-        title.setBounds(90, 70, 250, 90);
+        title.setBounds(70, 50, 250, 90);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Bitmap em Sem título-1.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(-90, 340, 450, 390);
+        jLabel2.setBounds(160, -80, 450, 390);
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sem título-1.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg.png"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(-10, -310, 1180, 860);
 
@@ -401,10 +411,30 @@ public class Interface extends javax.swing.JFrame
 
     }//GEN-LAST:event_jButton_GenerateXmlActionPerformed
 
+    private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
+        project = new Project();
+        numberOfClasses = new NumberOfClasses();
+        numberOfInterfaces = new NumberOfInterfaces();
+        maxDit = new MaxDit();
+        linesOfCode = new LinesOfCode();
+        numberOfAttributes = new NumberOfAttributes();
+        numberOfMethods = new NumberOfMethods();
+        numberOfChildren = new NumberOfChildren();
+        
+        if (project.getFilesFolder())
+        {   jButton1.setEnabled(true);
+            jButton2.setEnabled(false);
+            jButton_GenerateXml.setEnabled(false);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton3MousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton_GenerateXml;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
