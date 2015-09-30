@@ -217,7 +217,7 @@ public class Interface extends javax.swing.JFrame
         jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Não sabe o que fazer? \n\nSelecione um diretório clicando em Arquivo->Selecionar Pasta.");
+        jTextArea1.setText("Não sabe o que fazer? \n\nSelecione um diretório clicando no botão \"Selecionar Entrada\"\n");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setAutoscrolls(false);
         jTextArea1.setFocusable(false);
@@ -323,20 +323,20 @@ public class Interface extends javax.swing.JFrame
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         jTextArea1.setText("\n");
-        jTextArea1.append("\t\tMétricas do projeto");
-        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("Métricas do projeto");
+        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append("\n\t\tNúmero de classes: "+numberOfClasses.getNumberOfClasses());
         jTextArea1.append("\n\t\tNúmero de interfaces: "+numberOfInterfaces.getNumberOfInterface());
         jTextArea1.append("\n\t\tDit Máximo: "+maxDit.getMaxDit());
         jTextArea1.append("\n\t\tLinhas de código: "+linesOfCode.getLinesOfCode());
-        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append("\n\n");
-        jTextArea1.append("\n\t\tMétricas de classe (média e desvio padrão)");
-        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("\nMétricas de classe (média e desvio padrão)");
+        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append(String.format("\n\t\tNúmero de atributos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfAttributes.getAverage(), numberOfAttributes.getStandartDeviation()));
-        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("\n-----------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append(String.format("\n\t\tNúmero de métodos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfMethods.getAverage(), numberOfMethods.getStandartDeviation()));
-        jTextArea1.append("\n----------------------------------------------------------------------------------------------------------------------------");
+        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
         jTextArea1.append(String.format("\n\t\tNúmero de filhos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation()));
     }//GEN-LAST:event_jButton2ActionPerformed
     
