@@ -14,15 +14,11 @@ import SistemaDesktop.NumberOfInterfaces;
 import SistemaDesktop.NumberOfMethods;
 import SistemaDesktop.Project;
 import SistemaDesktop.XmlArchive;
-import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 /**
  * Classe responsável por realizar a interface entre o programa e o usuário.
@@ -32,6 +28,7 @@ import javax.swing.table.TableColumnModel;
 public class Interface extends javax.swing.JFrame 
 {   
     private Project project;
+    private Result result;
     private NumberOfClasses numberOfClasses;
     private NumberOfInterfaces numberOfInterfaces;
     private MaxDit maxDit;
@@ -130,10 +127,10 @@ public class Interface extends javax.swing.JFrame
     {
         initComponents(); 
         
-        this.setSize(969, 580);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        this.setSize(516, 583);
         this.setTitle("Blue Phoenix");
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);  
     }
 
     /**
@@ -145,6 +142,7 @@ public class Interface extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton_GenerateXml = new javax.swing.JButton();
@@ -152,14 +150,14 @@ public class Interface extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         title = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Desktop");
@@ -175,7 +173,7 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(70, 230, 300, 40);
+        jButton1.setBounds(110, 230, 300, 40);
 
         jButton2 = new RoundedCornerButton();
         jButton2.setText("Mostrar Resultados");
@@ -186,7 +184,7 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(70, 290, 300, 40);
+        jButton2.setBounds(110, 290, 300, 40);
 
         jButton_GenerateXml = new RoundedCornerButton();
         jButton_GenerateXml.setText("Gerar XML");
@@ -197,17 +195,17 @@ public class Interface extends javax.swing.JFrame
             }
         });
         getContentPane().add(jButton_GenerateXml);
-        jButton_GenerateXml.setBounds(70, 350, 300, 40);
+        jButton_GenerateXml.setBounds(110, 350, 300, 40);
 
         jButton3 = new RoundedCornerButton();
-        jButton3.setText("Selecionar Entrada");
+        jButton3.setText("Selecionar Projeto");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton3MousePressed(evt);
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(70, 170, 300, 40);
+        jButton3.setBounds(110, 170, 300, 40);
 
         jScrollPane1.setFocusCycleRoot(true);
         jScrollPane1.setFocusable(false);
@@ -217,7 +215,7 @@ public class Interface extends javax.swing.JFrame
         jTextArea1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Não sabe o que fazer? \n\nSelecione um diretório clicando no botão \"Selecionar Entrada\"\n");
+        jTextArea1.setText("Não sabe o que fazer? \nSelecione um diretório clicando no botão \"Selecionar Projeto\"\n");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setAutoscrolls(false);
         jTextArea1.setFocusable(false);
@@ -225,32 +223,22 @@ public class Interface extends javax.swing.JFrame
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(430, 50, 510, 430);
+        jScrollPane1.setBounds(110, 410, 300, 100);
 
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/blue2.png"))); // NOI18N
         getContentPane().add(title);
-        title.setBounds(70, 50, 250, 90);
+        title.setBounds(140, 50, 250, 90);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Bitmap em Sem título-1.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(160, -80, 450, 390);
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Bitmap em Sem título-1.png"))); // NOI18N
+        getContentPane().add(Logo);
+        Logo.setBounds(230, 40, 210, 140);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg.png"))); // NOI18N
         getContentPane().add(background);
         background.setBounds(-10, -310, 1180, 860);
 
-        jMenu1.setText("Arquivo");
-
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add147.png"))); // NOI18N
-        jMenuItem1.setText("Selecionar Pasta");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         jMenu2.setText("Sobre");
 
@@ -316,56 +304,19 @@ public class Interface extends javax.swing.JFrame
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
-     * Método responsável por mostrar o resultado no log.
+     * Método responsável por mostrar o resultado.
      * 
      * @param evt - Corresponde ao clique do mouse. 
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        jTextArea1.setText("\n");
-        jTextArea1.append("Métricas do projeto");
-        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
-        jTextArea1.append("\n\t\tNúmero de classes: "+numberOfClasses.getNumberOfClasses());
-        jTextArea1.append("\n\t\tNúmero de interfaces: "+numberOfInterfaces.getNumberOfInterface());
-        jTextArea1.append("\n\t\tDit Máximo: "+maxDit.getMaxDit());
-        jTextArea1.append("\n\t\tLinhas de código: "+linesOfCode.getLinesOfCode());
-        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
-        jTextArea1.append("\n\n");
-        jTextArea1.append("\nMétricas de classe (média e desvio padrão)");
-        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
-        jTextArea1.append(String.format("\n\t\tNúmero de atributos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfAttributes.getAverage(), numberOfAttributes.getStandartDeviation()));
-        jTextArea1.append("\n-----------------------------------------------------------------------------------------------------------------------------");
-        jTextArea1.append(String.format("\n\t\tNúmero de métodos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfMethods.getAverage(), numberOfMethods.getStandartDeviation()));
-        jTextArea1.append("\n------------------------------------------------------------------------------------------------------------------------------");
-        jTextArea1.append(String.format("\n\t\tNúmero de filhos\n\t\tMédia: %.02f\n\t\tDesvio padrão: %.02f", numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation()));
+        if (result != null)
+            result.dispose();
+        
+        result = new Result(numberOfClasses.getNumberOfClasses(), numberOfInterfaces.getNumberOfInterface(), maxDit.getMaxDit(), linesOfCode.getLinesOfCode(), numberOfAttributes.getAverage(), numberOfAttributes.getStandartDeviation(), numberOfMethods.getAverage(), numberOfMethods.getStandartDeviation(), numberOfChildren.getAverage(), numberOfChildren.getStandartDeviation());
+        
+        jTextArea1.setText("O resultado da análise pode ser visualizada no quadro ao lado.");
     }//GEN-LAST:event_jButton2ActionPerformed
-    
-    /**
-     * Método responsável por percorrer o diretório e encontrar os arquivos
-     * .java.
-     * 
-     * @param evt - Corresponde ao clique do mouse.
-     */
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-        
-        project = new Project();
-        numberOfClasses = new NumberOfClasses();
-        numberOfInterfaces = new NumberOfInterfaces();
-        maxDit = new MaxDit();
-        linesOfCode = new LinesOfCode();
-        numberOfAttributes = new NumberOfAttributes();
-        numberOfMethods = new NumberOfMethods();
-        numberOfChildren = new NumberOfChildren();
-        
-        if (project.getFilesFolder())
-        {   jButton1.setEnabled(true);
-            jButton2.setEnabled(false);
-            jButton_GenerateXml.setEnabled(false);
-            
-        }
-        else
-            JOptionPane.showMessageDialog(null, "Você não escolheu nenhum diretório válido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);  
-    }//GEN-LAST:event_jMenuItem1MousePressed
     
     /**
      * Método responsável por informar os desenvolvedores do projeto.
@@ -395,24 +346,20 @@ public class Interface extends javax.swing.JFrame
     private void jButton_GenerateXmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GenerateXmlActionPerformed
         
         JFileChooser saveFile = new JFileChooser(); 
-        //String answer = (JOptionPane.showInputDialog("Insira o nome do projeto: "));
-        
-        int resultado = saveFile.showSaveDialog(this);
+        int valueSave = saveFile.showSaveDialog(this);
         File file = saveFile.getSelectedFile();
         
-        if (resultado == JFileChooser.APPROVE_OPTION){
-            String answer = file.getName();
+        if (valueSave == JFileChooser.APPROVE_OPTION)
+        {   String answer = file.getName();
             answer = answer.replaceAll("\\s+", "");
             XmlArchive xml = new XmlArchive(answer);
             xml.generateXML(this, answer, file);
             jTextArea1.setText("O arquivo xml foi criado com sucesso.");
         }
-        else
-            return;
-
     }//GEN-LAST:event_jButton_GenerateXmlActionPerformed
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
+        
         project = new Project();
         numberOfClasses = new NumberOfClasses();
         numberOfInterfaces = new NumberOfInterfaces();
@@ -432,13 +379,12 @@ public class Interface extends javax.swing.JFrame
     }//GEN-LAST:event_jButton3MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logo;
     private javax.swing.JLabel background;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton_GenerateXml;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

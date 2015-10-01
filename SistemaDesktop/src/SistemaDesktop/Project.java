@@ -177,6 +177,14 @@ public class Project
                             j++;
                         j++;
                     }
+                   
+                    if (file.charAt(j) == '"')
+                    {   j++;
+                        while (file.charAt(j) != '"')
+                            j++;
+                        
+                        j++;
+                    }
                     temp[index] = file.charAt(j);
                     index++;
                 }
