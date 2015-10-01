@@ -129,7 +129,7 @@ public class Project
      * @throws IOException - Corresponde à alguma exceção na leitura de
      * arquivos.
      */
-    private String fileToString(File file, int i) throws FileNotFoundException, IOException
+    private String fileToString(File file) throws FileNotFoundException, IOException
     {
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -156,7 +156,7 @@ public class Project
         {   flag = false;
             do     
             {   if (!flag)
-                {   file = fileToString (files.get(i), i);
+                {   file = fileToString (files.get(i));
                     flag = true;
                 }
                 else
@@ -167,26 +167,27 @@ public class Project
                 for (int j=0; j<file.length()-1; j++)
                 {   if (file.charAt(j) == '/' && file.charAt(j+1) == '*')
                     {   j+=2;
-                        while(file.charAt(j) != '*' || file.charAt(j+1) != '/')
+                        while(j<file.length()-1 && file.charAt(j) != '*' || file.charAt(j+1) != '/')
                             j++;
                         j+=2;
                     }
-                    if (file.charAt(j) == '/' && file.charAt(j+1) == '/')
+                    if (j <file.length()-1 && file.charAt(j) == '/'  && file.charAt(j+1) == '/')
                     {   j+=2;
-                        while (file.charAt(j) != '\n')
+                        while (j<file.length()-1 && file.charAt(j) != '\n')
                             j++;
                         j++;
                     }
                    
-                    if (file.charAt(j) == '"')
+                    if (j <file.length()-1 && file.charAt(j) == '"')
                     {   j++;
-                        while (file.charAt(j) != '"')
-                            j++;
-                        
+                        while (j<file.length()-1 && file.charAt(j) != '"')
+                            j++;        
                         j++;
                     }
-                    temp[index] = file.charAt(j);
-                    index++;
+                    if (j <file.length()-1)
+                    {   temp[index] = file.charAt(j);
+                        index++;
+                    }
                 }
                 temp[index] = file.charAt(file.length()-1);
                 stringTemp = new String(temp, 0, index+1);
