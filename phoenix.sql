@@ -10,9 +10,9 @@ USE BluePhoenix;
 -- Cria a tabela USUARIO obs: ele reconhece USER como um comando
 CREATE TABLE Usuario(
 	userId 	  	 INT	     		NOT NULL,
-    userEmail	 VARCHAR(45)		NOT NULL,
-    userName  	 VARCHAR(45)		NOT NULL,
-    userPassword VARCHAR(45)		NOT NULL,
+    userEmail	 VARCHAR(100)		NOT NULL,
+    userName  	 VARCHAR(100)		NOT NULL,
+    userPassword VARCHAR(100)		NOT NULL,
     
 PRIMARY KEY (userId)    
 );
@@ -23,7 +23,7 @@ CREATE TABLE Project(
     projectMetrics_idProjectMetrics 	INT,
     classMetrics_idClassMetrics			INT,
     user_userId							INT,
-    user_email							VARCHAR(45),
+    user_email							VARCHAR(100),
 PRIMARY KEY (nSeq),
 FOREIGN KEY (projectMetrics_idProjectMetrics) REFERENCES ProjectMetrics (idProjectMetrics),
 FOREIGN KEY (classMetrics_idClassMetrics) REFERENCES ClassMetrics (idClassMetrics),
